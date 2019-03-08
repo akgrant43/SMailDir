@@ -1,17 +1,16 @@
 {
-	"category" : "MailDir-Core",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "MailDir-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"startMail",
 		"mails",
 		"archive",
-		"senderNamesString" ],
+		"senderNamesString"
+	],
 	"name" : "MDMailConversation",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

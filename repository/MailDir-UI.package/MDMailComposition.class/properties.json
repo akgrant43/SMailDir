@@ -1,14 +1,13 @@
 {
-	"category" : "MailDir-UI",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"selectedProfileIndex" ],
-	"name" : "MDMailComposition",
-	"pools" : [
-		 ],
 	"super" : "MailComposition",
-	"type" : "normal" }
+	"category" : "MailDir-UI",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"selectedProfileIndex"
+	],
+	"name" : "MDMailComposition",
+	"type" : "normal"
+}

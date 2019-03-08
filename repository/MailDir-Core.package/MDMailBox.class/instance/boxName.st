@@ -1,4 +1,4 @@
 accessing
 boxName
 
-	^ (self fileDirectory localName findTokens: '.') last
+	^ (self fileDirectory basename findTokens: '.') last

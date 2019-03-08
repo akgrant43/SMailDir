@@ -1,4 +1,4 @@
 files
 fullBoxName
 
-	^ self fileDirectory localName
+	^ self fileDirectory basename

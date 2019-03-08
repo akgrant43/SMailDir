@@ -1,19 +1,18 @@
 {
-	"category" : "MailDir-UI",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "MailDir-UI",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"boxes",
 		"selectedElement",
 		"selectedParent",
 		"selectedPath",
 		"hasSeenChange",
-		"previouslyBoxMovedTo" ],
+		"previouslyBoxMovedTo"
+	],
 	"name" : "MDBoxBrowser",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

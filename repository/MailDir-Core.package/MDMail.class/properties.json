@@ -1,10 +1,10 @@
 {
-	"category" : "MailDir-Core",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "pre 10/8/2018 14:11",
+	"super" : "Object",
+	"category" : "MailDir-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"header",
 		"subject",
@@ -19,9 +19,8 @@
 		"isImportant",
 		"fileAccessMutex",
 		"entries",
-		"mailArchive" ],
+		"mailArchive"
+	],
 	"name" : "MDMail",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

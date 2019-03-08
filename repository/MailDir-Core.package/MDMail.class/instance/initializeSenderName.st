@@ -3,9 +3,11 @@ initializeSenderName
 
 	| nameAndAddress |
 	sender isEmptyOrNil ifTrue: [^ senderName := 'unkown'].
-	[nameAndAddress := (MailAddressParser addressesAndNamePairsIn: sender) first]
+	[nameAndAddress := (MailAddressParser addressesIn: sender) first]
 		on: Error
 		do: [:e | senderName := 'unretrievable'. ^ self].
-	senderName := nameAndAddress first
+	"In Pharo, MailAddressParser appears to only return the email address string (name is discarded)"
+	senderName := nameAndAddress.
+"	senderName := nameAndAddress first
 		ifEmpty: [nameAndAddress second]
-		ifNotEmpty: [nameAndAddress first].
+		ifNotEmpty: [nameAndAddress first]."

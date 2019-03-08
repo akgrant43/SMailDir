@@ -1,10 +1,10 @@
 {
-	"category" : "MailDir-Core",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "MailDir-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"fileDirectory",
 		"boxes",
@@ -16,9 +16,8 @@
 		"archiveBoxName",
 		"sentBoxName",
 		"draftsBoxName",
-		"indexSemaphore" ],
+		"indexSemaphore"
+	],
 	"name" : "MDMailArchive",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

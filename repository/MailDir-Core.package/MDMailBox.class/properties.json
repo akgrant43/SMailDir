@@ -1,17 +1,16 @@
 {
-	"category" : "MailDir-Core",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "MailDir-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"fileDirectory",
 		"mailArchive",
 		"subBoxes",
-		"mails" ],
+		"mails"
+	],
 	"name" : "MDMailBox",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

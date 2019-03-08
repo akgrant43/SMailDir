@@ -1,14 +1,13 @@
 {
-	"category" : "MailDir-UI",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"profileSelected" ],
-	"name" : "MDMailProfileBrowser",
-	"pools" : [
-		 ],
 	"super" : "Model",
-	"type" : "normal" }
+	"category" : "MailDir-UI",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"profileSelected"
+	],
+	"name" : "MDMailProfileBrowser",
+	"type" : "normal"
+}

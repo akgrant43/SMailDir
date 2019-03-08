@@ -6,7 +6,7 @@ baseline: spec
 		do: [
 			spec
 				baseline: 'Rack' with: 
-					[spec repository: 'github://hpi-swa/Rack:master/repository'].
+					[spec repository: 'github://akgrant43/Rack:akg/repository'].
 			
 			spec
 				package: 'MailDir-Core';

@@ -1,14 +1,11 @@
 {
-	"category" : "MailDir-UI",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "MDEmailReader",
-	"pools" : [
-		 ],
 	"super" : "MailComposition",
-	"type" : "normal" }
+	"category" : "MailDir-UI",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MDEmailReader",
+	"type" : "normal"
+}
