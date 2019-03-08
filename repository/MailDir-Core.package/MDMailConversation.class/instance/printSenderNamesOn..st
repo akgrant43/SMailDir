@@ -6,7 +6,7 @@ printSenderNamesOn: aStream
 	senderNamesString ifNil: [
 		senderNames := self mails collect: [:mail | mail senderName].
 		senderNames := (senderNames reject: [:s | s isEmpty]) asSet asArray.
-		senderNamesString := senderNames joinSeparatedBy: ' and '.].
+		senderNamesString := ', ' join: senderNames ].
 	
 	max := 38.	
 	aStream nextPutAll:  

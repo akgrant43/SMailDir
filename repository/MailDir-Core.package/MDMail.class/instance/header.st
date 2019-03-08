@@ -1,15 +1,8 @@
 accessing
 header
-	"Read the header records from the receiver's file if necessary.
-	ToDo: Add retry with different file encodings, e.g. ISO88592"
+	"Read the header records from the receiver's file if necessary"
 
-	| contents |
-
-	^header ifNil: 
-		[ contents := [self file reference contents ]
-				on: ZnInvalidUTF8 
-				do: [ self file reference readStreamEncoded: 'iso88592' do: [ :stream | stream upToEnd ] ].
-		header := MailMessage fromRfc822: contents ]
+	^MailMessage fromRfc822: self fileContents
 
 "	^ header ifNil: [ | stream result line |
 		self file readStreamDo: [ :rstream |
