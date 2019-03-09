@@ -1,0 +1,22 @@
+{
+	"commentStamp" : "",
+	"super" : "PP2CompositeNode",
+	"category" : "MailDir-Search",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"expression",
+		"searchAnd",
+		"searchOr",
+		"word",
+		"ampersand",
+		"pipe",
+		"openBracket",
+		"closeBracket",
+		"parentheses",
+		"primary"
+	],
+	"name" : "MDSearchGrammar",
+	"type" : "normal"
+}

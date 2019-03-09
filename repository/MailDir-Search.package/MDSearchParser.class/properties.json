@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "MDSearchGrammar",
+	"category" : "MailDir-Search",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MDSearchParser",
+	"type" : "normal"
+}

@@ -1,0 +1,3 @@
+grammar
+primary
+	^ word / parentheses
