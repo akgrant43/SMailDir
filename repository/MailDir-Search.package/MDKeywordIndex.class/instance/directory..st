@@ -1,9 +1,9 @@
 accessing
-dirString: aString
+directory: aFileReference
 
-	dirString := aString.
+	directory := aFileReference asFileReference.
 	process ifNil:
-		[ process := [ archive := MDMailArchive archiveIn: dirString asFileReference.
+		[ process := [ archive := MDMailArchive archiveIn: directory.
 		archiveName ifNotNil: [ archive archiveName: archiveName ].
 		trashBoxName ifNotNil: [ archive trashBoxName: trashBoxName ].
 		process := nil ] forkAt: Processor userBackgroundPriority named: 'MDKeywordIndex load' ]
