@@ -1,15 +1,18 @@
 {
 	"commentStamp" : "",
-	"super" : "MDSearchNode",
+	"super" : "Object",
 	"category" : "MailDir-Search",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"word",
-		"regex",
-		"index"
+		"dirString",
+		"index",
+		"archive",
+		"archiveName",
+		"trashBoxName",
+		"indexMutex"
 	],
-	"name" : "MDSearchWord",
+	"name" : "MDKeywordIndex",
 	"type" : "normal"
 }
