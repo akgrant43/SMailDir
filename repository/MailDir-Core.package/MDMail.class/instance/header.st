@@ -2,7 +2,7 @@ accessing
 header
 	"Read the header records from the receiver's file if necessary"
 
-	^MailMessage fromRfc822: self fileContents
+	^header ifNil: [ header := MailMessage fromRfc822: self fileContents ]
 
 "	^ header ifNil: [ | stream result line |
 		self file readStreamDo: [ :rstream |

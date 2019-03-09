@@ -11,7 +11,8 @@
 		"archive",
 		"archiveName",
 		"trashBoxName",
-		"indexMutex"
+		"indexMutex",
+		"process"
 	],
 	"name" : "MDKeywordIndex",
 	"type" : "normal"
