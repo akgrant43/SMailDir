@@ -1,3 +1,5 @@
 accessing
-word: anObject
-	word := anObject
+word: aString
+
+	word := aString.
+	regex := aString asRegexIgnoringCase

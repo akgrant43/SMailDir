@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"word"
+		"word",
+		"regex"
 	],
 	"name" : "MDSearchWord",
 	"type" : "normal"

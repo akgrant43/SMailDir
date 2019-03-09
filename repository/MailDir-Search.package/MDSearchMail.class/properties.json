@@ -1,0 +1,21 @@
+{
+	"commentStamp" : "AlistairGrant 3/9/2019 09:45",
+	"super" : "Object",
+	"category" : "MailDir-Search",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"mdMail",
+		"subject",
+		"sender",
+		"senderAddress",
+		"senderName",
+		"recipients",
+		"date",
+		"cc",
+		"body"
+	],
+	"name" : "MDSearchMail",
+	"type" : "normal"
+}
