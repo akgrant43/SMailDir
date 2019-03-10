@@ -1,11 +1,12 @@
 initialize-release
 initializeHeaderInformation
 
-	subject := self header subject.
-	date := self header date.
-	recipients := self header to.
-	cc := self header cc.
-	messageId := self header messageId.
-	sender := self header from.
+	header := self header.
+	subject := header subject.
+	date := header date.
+	recipients := header to.
+	cc := header cc.
+	messageId := header messageId.
+	sender := header from.
 	self initializeSenderName.
 	header := nil. "To make space for other data"

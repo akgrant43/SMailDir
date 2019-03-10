@@ -1,8 +1,9 @@
 accessing
 header
-	"Read the header records from the receiver's file if necessary"
+	"Read the header records from the receiver's file.
+	Don't cache to reduce memory."
 
-	^header ifNil: [ header := MailMessage fromRfc822: self fileContents ]
+	^MailMessage fromRfc822: self fileContents headersOnly: true
 
 "	^ header ifNil: [ | stream result line |
 		self file readStreamDo: [ :rstream |
