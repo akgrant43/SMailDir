@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "MDSearchNode",
+	"category" : "MailDir-Search",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"date"
+	],
+	"name" : "MDSearchDateBefore",
+	"type" : "normal"
+}
