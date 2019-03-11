@@ -14,7 +14,8 @@
 		"recipients",
 		"date",
 		"cc",
-		"body"
+		"body",
+		"timestamp"
 	],
 	"name" : "MDSearchMail",
 	"type" : "normal"
