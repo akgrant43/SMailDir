@@ -1,4 +1,4 @@
 ston persistence
 mailArchive: anArchive
 
-	recipients := anArchive
+	mailArchive := anArchive

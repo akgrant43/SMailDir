@@ -1,4 +1,4 @@
 searching
 search: aMDSearchMail
 
-	^aMDSearchMail >= date
+	^aMDSearchMail timestamp >= date
