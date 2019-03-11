@@ -3,7 +3,7 @@ saveToFile
 
 	| file backup stream |
 
-	file := (archiveName, '.index.stgz') asFileReference.
+	file := (archiveName, '-index.stgz') asFileReference.
 	file exists ifTrue: 
 		[ backup := file nextVersion.
 		file copy moveTo: backup ].

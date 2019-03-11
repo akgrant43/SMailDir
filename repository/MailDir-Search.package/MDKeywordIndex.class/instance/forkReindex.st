@@ -2,7 +2,9 @@ index management
 forkReindex
 
 	process ifNil:
-		[ process := [ self reindex ] 
+		[ process := [ 
+				self reindex.
+				process := nil. ] 
 			forkAt: Processor userBackgroundPriority 
 			named: 'MDKeywordIndex reindex' ]
 	ifNotNil: 
