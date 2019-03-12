@@ -7,8 +7,9 @@ fromSton: stonReader
 	stonReader parseListDo: [ :each :idx |
 		idx = 1 ifFalse: [ self error: 'Invalid STON' ].
 		index
-			directory: (each at: 'directory');
+			basicDirectory: (each at: 'directory');
 			archiveName: (each at: 'archiveName');
 			trashBoxName: (each at: 'trashBoxName');
-			index: (each at: 'index') ].
+			index: (each at: 'index');
+			archive: (each at: 'archive') ].
 	^index
