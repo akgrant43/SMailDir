@@ -13,3 +13,4 @@ saveToFile
 		encoding: 'utf8') asNewLineStream.
 	[ STON put: self onStreamPretty: stream ]
 		ensure: [ stream close ].
+	^file pathString
