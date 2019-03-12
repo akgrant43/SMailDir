@@ -3,6 +3,7 @@ header
 	"Read the header records from the receiver's file.
 	Don't cache to reduce memory."
 
+	thisContext sender selector = #initializeHeaderInformation ifFalse: [ self halt ].
 	^MailMessage fromRfc822: self fileContents headersOnly: true
 
 "	^ header ifNil: [ | stream result line |

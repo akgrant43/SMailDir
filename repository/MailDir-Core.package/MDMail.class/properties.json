@@ -12,7 +12,6 @@
 		"senderAddress",
 		"senderName",
 		"recipients",
-		"date",
 		"timestamp",
 		"messageId",
 		"cc",
@@ -20,7 +19,8 @@
 		"isImportant",
 		"fileAccessMutex",
 		"entries",
-		"mailArchive"
+		"mailArchive",
+		"inReplyTo"
 	],
 	"name" : "MDMail",
 	"type" : "normal"
