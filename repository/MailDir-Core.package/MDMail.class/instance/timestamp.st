@@ -1,5 +1,5 @@
 accessing structure variables
 timestamp
-	"Answer a Date for the receiver (try to parse the date string)"
+	"Answer a DateAndTime for the receiver"
 
-	^Date fromString: self date
+	^timestamp

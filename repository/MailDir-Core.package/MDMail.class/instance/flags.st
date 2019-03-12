@@ -4,7 +4,7 @@ flags
 	"The following code is a performance optimization as this method gets called a LOT
 	as it influences the mail icons. --pre"
 	| fileName fileNameSize flagSeparatorIndex normalFlagIndex |
-	fileName := self file name.
+	fileName := self file basename.
 	fileNameSize := fileName size.
 	flagSeparatorIndex := fileName indexOf: self flagSeparator asCharacter startingAt: (fileNameSize - 10). 
 	normalFlagIndex := fileName indexOf: $2 startingAt: flagSeparatorIndex.

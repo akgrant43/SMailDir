@@ -1,4 +1,4 @@
 instance creation
 archiveIn: aFileDirectory
 
-	^ self archiveIn: aFileDirectory flagSeparator: $;
+	^ self archiveIn: aFileDirectory flagSeparator: nil

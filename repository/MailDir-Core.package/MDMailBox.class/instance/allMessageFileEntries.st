@@ -1,5 +1,5 @@
 files
 allMessageFileEntries
 
-	^ self newMessagesDirectory entries , self currentMessagesDirectory entries
+	^ self newMessagesDirectory children , self currentMessagesDirectory children
 	

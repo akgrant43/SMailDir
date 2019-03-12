@@ -4,6 +4,7 @@ initializeHeaderInformation
 	header := self header.
 	subject := header subject.
 	date := header date.
+	timestamp := header timestamp.
 	recipients := header to.
 	cc := header cc.
 	messageId := header messageId.

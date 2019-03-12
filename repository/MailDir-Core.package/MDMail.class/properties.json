@@ -13,6 +13,7 @@
 		"senderName",
 		"recipients",
 		"date",
+		"timestamp",
 		"messageId",
 		"cc",
 		"hasBeenSeen",
