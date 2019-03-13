@@ -1,3 +1,3 @@
 accessing
 trashBoxName
-	^ trashBoxName
+	^ trashBoxName ifNil: [ 'trash' ]

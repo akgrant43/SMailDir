@@ -1,3 +1,3 @@
 accessing
 archiveName
-	^ archiveName
+	^ archiveName ifNil: [ directory basename ]
