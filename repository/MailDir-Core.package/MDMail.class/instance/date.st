@@ -1,5 +1,5 @@
-meta information
+accessing structure variables
 date
-	"Answer the receiver's date in US format (MM/DD/YY)"
+	"Answer a DateAndTime for the receiver"
 
-	^ self timestamp asDate printFormat: #(2 1 3 47 1 2)
+	^date

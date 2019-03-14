@@ -1,7 +1,4 @@
 fixtures
 changeFlagsOfNewMail
 
-	(boxDirectory / 'cur') rename: self addedMailFileName toBe: self addedMailFileName allButLast
-	
-	
-	
+	(boxDirectory / 'cur' / self addedMailFileName) moveTo: (boxDirectory / 'cur' / self addedMailFileName allButLast)

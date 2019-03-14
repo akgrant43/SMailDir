@@ -1,5 +1,5 @@
 fixtures
 addNewMail
 
-	(boxDirectory / 'cur') newFileNamed: self addedMailFileName do: [:file |
-		file nextPutAll: self addedMailFileContent].
+	(boxDirectory / 'cur' / self addedMailFileName) writeStreamEncoded: 'null' do: [ :stream |
+		stream nextPutAll: self addedMailFileContent].

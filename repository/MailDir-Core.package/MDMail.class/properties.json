@@ -14,7 +14,6 @@
 		"senderAddress",
 		"senderName",
 		"recipients",
-		"timestamp",
 		"messageId",
 		"cc",
 		"hasBeenSeen",
@@ -22,7 +21,8 @@
 		"fileAccessMutex",
 		"entries",
 		"mailArchive",
-		"inReplyTo"
+		"inReplyTo",
+		"date"
 	],
 	"name" : "MDMail",
 	"type" : "normal"

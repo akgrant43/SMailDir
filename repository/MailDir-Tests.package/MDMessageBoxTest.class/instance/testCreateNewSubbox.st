@@ -1,10 +1,11 @@
 tests
 testCreateNewSubbox
-	
+
+	| subBox |
+
 	box createSubBoxNamed: 'myNewSubBox'.
-	
-	self assert: (archiveDirectory directoryExists: (boxName , '.' , 'myNewSubBox')).
-	self assert: (archiveDirectory directoryExists: (boxName , '.' , 'myNewSubBox/cur')).
-	self assert: (archiveDirectory directoryExists: (boxName , '.' , 'myNewSubBox/new')).
-	self assert: (archiveDirectory directoryExists: (boxName , '.' , 'myNewSubBox/tmp')).
+	subBox := archiveDirectory / (boxName , '.' , 'myNewSubBox').
+	self assert: subBox isDirectory.
+	#(cur new tmp) do: [ :each |
+		self assert: (subBox / each) isDirectory ].
 	self assert: box subBoxes size equals: 1.

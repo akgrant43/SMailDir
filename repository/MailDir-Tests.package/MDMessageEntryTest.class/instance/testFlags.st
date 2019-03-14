@@ -1,5 +1,4 @@
 accessing
 testFlags
-
-	self assert: (messageEntry flags includesAllOf: #($R $S)).
-	self assert: (messageEntry flags size = 2)
+	self assert: (messageEntry flags includesAll: #($R $S)).
+	self assert: messageEntry flags size = 2

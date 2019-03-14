@@ -1,10 +1,9 @@
 accessing
 testHeaderIsAlreadyIncluded
 
-	self 
-		assert: 'editable views | Access to project was granted' equals: messageEntry subject;
-		assert: 'GitLab <gitlab@gitlab.com>' equals: messageEntry sender;
-		assert: 'patrick.rein@gmail.com' equals: messageEntry recipients;
-		assert: (DateAndTime year: 2014 month: 11 day: 13 hour: 23 minute: 51 second: 40) equals: messageEntry date;
-		assert: self mailMessageId equals: messageEntry messageId;
-		assert: '' equals: messageEntry cc
+	self assert: messageEntry subject equals: 'editable views | Access to project was granted'.
+	self assert: messageEntry sender equals: 'GitLab <gitlab@gitlab.com>'.
+	self assert: messageEntry recipients equals: 'patrick.rein@gmail.com'.
+	self assert: messageEntry date equals: (DateAndTime year: 2014 month: 11 day: 13 hour: 23 minute: 51 second: 40 offset: 0 hours).
+	self assert: self mailMessageId equals: messageEntry messageId.
+	self assert: messageEntry cc equals: ''
