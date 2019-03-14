@@ -1,4 +1,8 @@
 mails
 message
 
-	^ MailMessage fromRfc822: self fileContents
+	| stream |
+
+	stream := self fileStream.
+	^ [ MailMessage fromRfc822: stream ]
+		ensure: [ stream close ]
