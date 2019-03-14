@@ -1,3 +1,3 @@
 accessing
 timestamp
-	^ timestamp ifNil: [ timestamp := mdMail timestamp ]
+	^ timestamp ifNil: [ timestamp := mdMail date ]
