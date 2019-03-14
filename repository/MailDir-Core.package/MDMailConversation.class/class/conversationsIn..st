@@ -1,5 +1,7 @@
 instance creation
 conversationsIn: aCollectionOfMails
+	"Answer the set of conversations in aCollectionOfMails.
+	All mails must be in the same archive."
 
 	| newConversations archive |
 	aCollectionOfMails ifEmpty: [^ #()].

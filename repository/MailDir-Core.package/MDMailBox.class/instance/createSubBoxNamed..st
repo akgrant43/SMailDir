@@ -1,13 +1,10 @@
 boxes
 createSubBoxNamed: aString 
 	
-	| directoryName |
-	directoryName := self fullBoxName , $. , aString.
-	
-	self mailArchive fileDirectory assureExistenceOfPath: directoryName.
-	(self mailArchive fileDirectory / directoryName)
-		assureExistenceOfPath: 'new';
-		assureExistenceOfPath: 'cur';
-		assureExistenceOfPath: 'tmp'.
-		
+	| directoryName boxDirectory |
+
+	directoryName := self fullBoxName , '.' , aString.
+	boxDirectory := self mailArchive fileDirectory / directoryName.
+	boxDirectory ensureCreateDirectory.
+	#(new cur tmp) do: [ :each | (boxDirectory / each) ensureCreateDirectory ].
 	self synchronizeSubBoxes.

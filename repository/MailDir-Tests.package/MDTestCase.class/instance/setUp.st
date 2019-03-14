@@ -1,60 +1,60 @@
-accessing
+running
 setUp
 
-	| testDirectory tmpFile |
-	testDirectoryName := self directoryForTestName.
-	FileDirectory default createDirectory: testDirectoryName.
-	testDirectory := FileDirectory default / testDirectoryName.
-	
-	archiveName := DateAndTime milliSecondsSinceMidnight asString.
-	testDirectory createDirectory: archiveName.
-	archiveDirectory := testDirectory / archiveName.
-	
-	boxName := (DateAndTime milliSecondsSinceMidnight + 1) asString.
-	archiveDirectory createDirectory: boxName. 
-	boxDirectory := archiveDirectory / boxName.
-	boxDirectory createDirectory: 'new'.
-	boxDirectory createDirectory: 'cur'.
-	
-	tmpFile := (boxDirectory / 'new') fileNamed: self newMailFileName.
-	tmpFile nextPutAll: self newMailFileContent.
-	tmpFile flush; close.
-	tmpFile := (boxDirectory / 'cur') fileNamed: self mailFileName.
-	tmpFile nextPutAll: self mailFileContent. 
-	tmpFile flush; close.
-	tmpFile := (boxDirectory / 'cur') fileNamed: self doubleMailFileName1.
-	tmpFile nextPutAll: self doubleMailFileContent. 
-	tmpFile flush; close.
-	
-	box2Name := (DateAndTime milliSecondsSinceMidnight + 2) asString.
-	archiveDirectory createDirectory: box2Name. 
-	box2Directory := archiveDirectory / box2Name.
-	box2Directory createDirectory: 'new'.
-	box2Directory createDirectory: 'cur'.
-	
-	tmpFile := (box2Directory / 'cur') fileNamed: self doubleMailFileName2.
-	tmpFile nextPutAll: self doubleMailFileContent. 
-	tmpFile flush; close.
-	
-	trashBoxName := (DateAndTime milliSecondsSinceMidnight) asString , 'Trash'.
-	archiveDirectory createDirectory: trashBoxName. 
-	trashBoxDirectory := archiveDirectory / trashBoxName.
-	trashBoxDirectory createDirectory: 'new'.
-	trashBoxDirectory createDirectory: 'cur'.
+	| new cur |
 
-	archiveBoxName := (DateAndTime milliSecondsSinceMidnight) asString , 'Archive'.
-	archiveDirectory createDirectory: archiveBoxName. 
+	super setUp.
+	testDirectory := (FileLocator temp / self directoryForTestName) resolve.
+	testDirectory createDirectory.
+
+	archiveName := 'MailDirTests'.
+	archiveDirectory := testDirectory / archiveName.
+	archiveDirectory createDirectory.
+	
+	boxName := 'MailDirBox'.
+	boxDirectory := archiveDirectory / boxName.
+	boxDirectory createDirectory. 
+	new := boxDirectory / 'new'.
+	new createDirectory.
+	cur := boxDirectory / 'cur'.
+	cur createDirectory.
+	(boxDirectory / 'tmp') createDirectory.
+
+	(new / self newMailFileName) writeStreamEncoded: 'null' do: [ :stream |
+		stream nextPutAll: self newMailFileContent ].
+	(cur / self mailFileName) writeStreamEncoded: 'null' do: [ :stream |
+		stream nextPutAll: self mailFileContent ].
+	(cur / self doubleMailFileName1) writeStreamEncoded: 'null' do: [ :stream |
+		stream nextPutAll: self doubleMailFileContent ].
+	
+	box2Name := 'MailDirBox2'.
+	box2Directory := archiveDirectory / box2Name.
+	box2Directory createDirectory.
+	new := box2Directory / 'new'.
+	new createDirectory.
+	cur := box2Directory / 'cur'.
+	cur createDirectory.
+	(box2Directory / 'tmp') createDirectory.
+	
+	(cur / self doubleMailFileName2) writeStreamEncoded: 'null' do: [ :stream |
+		stream nextPutAll: self doubleMailFileContent ].
+	
+	trashBoxName := 'MailDirTrash'.
+	trashBoxDirectory := archiveDirectory / trashBoxName.
+	trashBoxDirectory createDirectory.
+	#(new cur tmp) do: [ :each | (trashBoxDirectory / each) createDirectory ].
+
+	archiveBoxName := 'MailBoxArchive'.
 	archiveBoxDirectory := archiveDirectory / archiveBoxName.
-	archiveBoxDirectory createDirectory: 'new'.
-	archiveBoxDirectory createDirectory: 'cur'.
-	
-	sentBoxName := (DateAndTime milliSecondsSinceMidnight) asString , 'Sent'.
-	archiveDirectory createDirectory: sentBoxName. 
+	archiveBoxDirectory createDirectory.
+	#(new cur tmp) do: [ :each | (archiveBoxDirectory / each) createDirectory ].
+
+	sentBoxName := 'MailBoxSent'.
 	sentBoxDirectory := archiveDirectory / sentBoxName.
-	sentBoxDirectory createDirectory: 'new'.
-	sentBoxDirectory createDirectory: 'cur'.
-	
-	archive := MDTestMailArchive archiveIn: archiveDirectory flagSeparator: $;.
+	sentBoxDirectory createDirectory.
+	#(new cur tmp) do: [ :each | (sentBoxDirectory / each) createDirectory ].
+
+	archive := MDMailArchive archiveIn: archiveDirectory flagSeparator: $;.
 	archive trashBoxName: trashBoxName.
 	archive archiveBoxName: archiveBoxName.
 	archive sentBoxName: sentBoxName.

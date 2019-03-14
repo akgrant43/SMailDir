@@ -1,10 +1,10 @@
 {
-	"category" : "MailDir-Tests",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "MailDir-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"messageEntry",
 		"boxDirectory",
@@ -13,7 +13,7 @@
 		"archiveName",
 		"archive",
 		"newMessageEntry",
-		"testDirectoryName",
+		"testDirectory",
 		"box2Name",
 		"box2Directory",
 		"box2",
@@ -27,9 +27,8 @@
 		"archiveDirectory",
 		"sentBoxName",
 		"sentBoxDirectory",
-		"sentBox" ],
+		"sentBox"
+	],
 	"name" : "MDTestCase",
-	"pools" : [
-		 ],
-	"super" : "TestCase",
-	"type" : "normal" }
+	"type" : "normal"
+}

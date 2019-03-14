@@ -1,12 +1,12 @@
 files
 copyFileTo: aBox
 
-	| directory |	
+	| directory newFile |	
 	directory := self hasBeenRead
 		ifTrue: [aBox currentMessagesDirectory]
 		ifFalse: [aBox newMessagesDirectory].
-		
-	(directory fileExists: self file readStream localName)
-		ifFalse: [self file copyTo: directory].
+	newFile := directory / self file basename.
+	newFile exists
+		ifFalse: [self file copyTo: newFile].
 
-	^ directory entryAt: self file readStream localName
+	^ newFile

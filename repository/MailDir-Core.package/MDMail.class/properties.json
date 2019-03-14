@@ -4,7 +4,9 @@
 	"category" : "MailDir-Core",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [ ],
+	"classvars" : [
+		"FileNameCounter"
+	],
 	"instvars" : [
 		"header",
 		"subject",

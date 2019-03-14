@@ -1,4 +1,5 @@
-accessing
+running
 tearDown
 	
-	(FileDirectory default / testDirectoryName) recursiveDelete.
+	testDirectory ensureDeleteAll.
+	super tearDown

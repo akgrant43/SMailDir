@@ -1,12 +1,12 @@
 tests
 testSynchronizationOfSubFolders
 
-	| newBoxName |
-	newBoxName := boxName , '.' , 'yetAnotherBox'.
-	archiveDirectory createDirectory: newBoxName.
-	(archiveDirectory / newBoxName) createDirectory: 'new'.
-	(archiveDirectory / newBoxName) createDirectory: 'cur'.
-	
+	| yab |
+
+	yab := archiveDirectory / (boxName , '.' , 'yetAnotherBox').
+	yab createDirectory.
+	#(new cur tmp) do: [ :each | (yab / each) createDirectory ].
+
 	archive synchronizeBoxes.
 	
 	self assert: 6 equals: archive allBoxes size.

@@ -1,7 +1,7 @@
 fixtures
 sentMailMessage
 
-	^ MailMessage from:  'Delivered-To: patrick.rein@gmail.com
+	^ MailMessage fromRfc822: 'Delivered-To: patrick.rein@gmail.com
 To: patrick.rein@gmail.com
 Subject: Asd has invited you to join CDG Labs on Slack
 Reply-To: asd@gmail.com

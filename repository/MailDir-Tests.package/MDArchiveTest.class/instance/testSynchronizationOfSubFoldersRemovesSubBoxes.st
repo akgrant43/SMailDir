@@ -1,17 +1,15 @@
 tests
 testSynchronizationOfSubFoldersRemovesSubBoxes
 
-	| newBoxName |
-	newBoxName := boxName , '.' , 'yetAnotherBox'.
-	archiveDirectory createDirectory: newBoxName.
-	(archiveDirectory / newBoxName) createDirectory: 'new'.
-	(archiveDirectory / newBoxName) createDirectory: 'cur'.
+	| yab |
+
+	yab := archiveDirectory / (boxName , '.' , 'yetAnotherBox').
+	yab createDirectory.
+	#(new cur tmp) do: [ :each | (yab / each) createDirectory ].
 	
 	archive synchronizeBoxes.
 	
-	(archiveDirectory / newBoxName) deleteDirectory: 'new'.
-	(archiveDirectory / newBoxName) deleteDirectory: 'cur'.
-	archiveDirectory deleteDirectory: newBoxName.
+	yab deleteAll.
 	
 	archive synchronizeBoxes.
 	

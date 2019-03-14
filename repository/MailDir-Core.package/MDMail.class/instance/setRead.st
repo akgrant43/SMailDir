@@ -8,7 +8,7 @@ setRead
 		| file box |
 		box := assoc key.
 		file := assoc value.
-		file containingDirectory ~= box currentMessagesDirectory]) do: [:assoc | | newFile |
+		file parent ~= box currentMessagesDirectory]) do: [:assoc | | newFile |
 		     newFile := self moveFile: assoc value within: assoc key.
 			self entries at: assoc key put: newFile].
 	

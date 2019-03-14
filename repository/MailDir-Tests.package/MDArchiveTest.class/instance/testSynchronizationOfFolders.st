@@ -1,9 +1,11 @@
 tests
 testSynchronizationOfFolders
 
-	archiveDirectory createDirectory: 'yetAnotherBox'.
-	(archiveDirectory / 'yetAnotherBox') createDirectory: 'new'.
-	(archiveDirectory / 'yetAnotherBox') createDirectory: 'cur'.
+	| yab |
+
+	yab := archiveDirectory / 'yetAnotherBox'.
+	yab createDirectory.
+	#(new cur tmp) do: [ :each | (yab / each) createDirectory ].
 	
 	archive synchronizeBoxes.
 	
