@@ -2,12 +2,12 @@ initialize-release
 initializeHeaderInformation
 
 	header := self header.
-	subject := header subject.
-	date := header timestamp.
-	recipients := header to.
-	cc := header cc.
-	messageId := header messageId.
-	sender := header from.
-	inReplyTo := header inReplyTo.
+	subject := header at: 'Subject' ifAbsent: [].
+	date := self timestampFrom: (header at: 'Date').
+	recipients := header at: 'To' ifAbsent: [].
+	cc := header at: 'Cc' ifAbsent: [].
+	messageId := header at: 'Message-Id' ifAbsent: [].
+	sender := header at: 'From'.
+	inReplyTo := header at: 'In-Reply-To' ifAbsent: [].
 	self initializeSenderName.
 	header := nil. "To make space for other data"

@@ -4,12 +4,12 @@ gtInspectMessagesIn: composite
 
 	^composite fastTable 
 		title: 'Messages';
-		display: [ self mails sorted: #timestamp descending ];
+		display: [ self mails sorted: #date descending ];
 		beMultiple;
 		enableElementIndex;
 		wantsAutomaticRefresh: true;
 		column: 'From' evaluated: [ :mail | mail sender ];
-		column: 'Date' evaluated: [ :mail | self humanDateStringFor: mail timestamp ];
+		column: 'Date' evaluated: [ :mail | self humanDateStringFor: mail date ];
 		column: 'Subject' evaluated: [ :mail | mail subject ];
 		send: [ :result | 
 			result isNil

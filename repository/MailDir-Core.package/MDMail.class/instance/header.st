@@ -3,12 +3,9 @@ header
 	"Read the header records from the receiver's file.
 	Don't cache to reduce memory."
 
-	| stream |
-
-	thisContext sender selector = #initializeHeaderInformation ifFalse: [ self halt ].
-	stream := self fileStream.
-	^[ MailMessage fromRfc822: stream headersOnly: true ]
-		ensure: [ stream close ]
+	"thisContext sender selector = #initializeHeaderInformation ifFalse: [ self halt ]."
+	^self file binaryReadStreamDo: [ :bstream |
+		ZnHeaders readFrom: (AkgMimeStream on: bstream) ].
 
 "	^ header ifNil: [ | stream result line |
 		self file readStreamDo: [ :rstream |

@@ -1,8 +1,5 @@
 mails
 message
 
-	| stream |
-
-	stream := self fileStream.
-	^ [ MailMessage fromRfc822: stream ]
-		ensure: [ stream close ]
+	^self file binaryReadStreamDo: [ :bstream |
+		ZnMimePart readFrom: (AkgMimeStream on: bstream) ].
