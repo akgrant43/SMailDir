@@ -26,7 +26,7 @@ decodeString: aString
 		ifFalse: [ ZnCharacterEncoder iso88591 ].
 	string := [ encoder decodeBytes: string asByteArray ]
 		on: Error 
-		do: [ ^string ].
+		do: [ ^string asString ].
 
 	resultStream := (String new: string size) writeStream.
 	resultStream << string.
