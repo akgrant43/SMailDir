@@ -1,5 +1,12 @@
 mails
 message
+	"Answer the MIME document of the receiver.
+	Emails should assume ascii as the default encoding."
 
 	^self file binaryReadStreamDo: [ :bstream |
-		ZnMimePart readFrom: (AkgMimeStream on: bstream) ].
+		ZnMaximumEntitySize
+			value: (2 ** 25)
+			during: 
+				[ ZnDefaultCharacterEncoder 
+					value: (ZnCharacterEncoder newForEncoding: #'null')
+					during: [ ZnMimePart readFrom: (AkgMimeStream on: bstream) ] ] ].

@@ -2,7 +2,7 @@ initialize-release
 initializeHeaderInformation
 
 	header := self header.
-	subject := header at: 'Subject' ifAbsent: [].
+	subject := self decodedHeaderField: 'Subject'.
 	date := self timestampFrom: (header at: 'Date').
 	recipients := header at: 'To' ifAbsent: [].
 	cc := header at: 'Cc' ifAbsent: [].
