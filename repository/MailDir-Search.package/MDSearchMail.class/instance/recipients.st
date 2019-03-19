@@ -1,3 +1,3 @@
 accessing
 recipients
-	^ recipients ifNil: [ recipients := mdMail recipients asLowercase asNonDiacritical ]
+	^ recipients ifNil: [ recipients := (mdMail recipients ifNil: [ '' ]) asLowercase asNonDiacritical ]

@@ -6,7 +6,8 @@ readRootBoxNames
 	boxNames := self readBoxNames select: [ :each | | boxDir |
 		boxDir := self fileDirectory / each.
 		(boxDir / 'cur') isDirectory and: [ (boxDir / 'new') isDirectory and: [ (boxDir / 'tmp') isDirectory ] ] ].
-	^(boxNames collect: [ :boxName | (boxName findTokens: '.') first ]) asSet 
+	^boxNames asSet
+	"^(boxNames collect: [ :boxName | (boxName findTokens: '.') last ]) asSet "
 
 "Original definition: This should be removed when confident.
 	boxNames := self readBoxNames.

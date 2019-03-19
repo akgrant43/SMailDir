@@ -1,3 +1,3 @@
 accessing
 body
-	^ body ifNil: [ body := mdMail message body contents asLowercase asNonDiacritical ]
+	^ body ifNil: [ body := (self messageTextIn: mdMail message) asLowercase asNonDiacritical ]

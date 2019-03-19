@@ -1,8 +1,9 @@
 initialize-release
 addBoxesWithNames: rootBoxNames
 
-	rootBoxNames do: [:rootBoxName | | rootBox |
-		rootBox := MDMailBox newFor: self fileDirectory / rootBoxName in: self.
+	rootBoxNames do: [ :dirName | | rootBoxName rootBox |
+		rootBoxName := (dirName findTokens: '.') last.
+		rootBox := MDMailBox newFor: self fileDirectory / dirName in: self.
 		self addBox: rootBox named: rootBoxName]
 	
 	
