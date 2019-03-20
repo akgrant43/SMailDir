@@ -4,7 +4,10 @@
 	"category" : "MailDir-Core",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [ ],
+	"classvars" : [
+		"Encoders",
+		"QPTranslation"
+	],
 	"instvars" : [ ],
 	"name" : "MimeEncodedWord",
 	"type" : "normal"
