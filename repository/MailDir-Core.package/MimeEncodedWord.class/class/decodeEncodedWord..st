@@ -23,7 +23,7 @@ decodeEncodedWord: aString
 			do: [ ^aString ].
 	encoder := characterEncoding = 'utf-8'
 		ifTrue: [ ZnCharacterEncoder utf8 ]
-		ifFalse: [ ZnCharacterEncoder iso88591 ].
+		ifFalse: [ ZnCharacterEncoder newForEncoding: characterEncoding ].
 	string := [ encoder decodeBytes: string asByteArray ]
 		on: Error 
 		do: [ ^string asString ].

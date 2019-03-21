@@ -11,7 +11,8 @@ decodeString: aString
 	end := -1.
 	[ start = 0 ] whileFalse:
 		[ resultStream nextPutAll: (aString copyFrom: end+2 to: start-1).
-		end := aString indexOfSubCollection: '?=' startingAt: start.
+		end := self findEndOfEncodedWordIn: aString startingAt: start.
+		"end := aString indexOfSubCollection: '?=' startingAt: start".
 		resultStream nextPutAll: (self decodeEncodedWord: (aString copyFrom: start to: end+1)).
 		start := aString indexOfSubCollection: '=?' startingAt: end ].
 	resultStream nextPutAll: (aString copyFrom: end+2 to: aString size).

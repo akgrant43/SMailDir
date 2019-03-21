@@ -3,7 +3,10 @@ decodedHeaderField: fieldName
 	"Answer the header field decoded as a Mime Encoded-Word.
 	The header must have been already cached."
 
-	| value |
+	| values value |
 
-	value := header at: fieldName ifAbsent: [ ^nil ].
-	^MimeEncodedWord decodeString: value
+	values := header at: fieldName ifAbsent: [ ^nil ].
+	value := values isString 
+		ifTrue: [ values ]
+		ifFalse: [ ', ' join: values ].
+	^MimeEncodedWord decodeString: value.

@@ -4,14 +4,14 @@ decodeQPString: aString
 
 	| readStream byte resultStream |
 
-	readStream := aString asByteArray readStream.
+	readStream := aString readStream.
 	resultStream := ByteArray new writeStream.
 	[ readStream atEnd ] whileFalse:
 		[ byte := readStream next.
-		byte = 95 "_" ifTrue:
+		byte = $_ ifTrue:
 			[ resultStream nextPut: 32 "space" ]
-		ifFalse: [ byte = 61 "=" ifTrue:
+		ifFalse: [ byte = $= ifTrue:
 			[ resultStream nextPut: (readStream next digitValue * 16 + readStream next digitValue) ]
 		ifFalse:
-			[ resultStream nextPut: byte ] ] ].
+			[ resultStream nextPut: byte asInteger ] ] ].
 	^resultStream contents
