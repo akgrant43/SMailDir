@@ -9,4 +9,4 @@ decodedHeaderField: fieldName
 	value := values isString 
 		ifTrue: [ values ]
 		ifFalse: [ ', ' join: values ].
-	^MimeEncodedWord decodeString: value.
+	^MimeEncodedWord decodeString: value trimBoth.

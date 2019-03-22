@@ -5,7 +5,7 @@ message
 
 	^self file binaryReadStreamDo: [ :bstream |
 		ZnMaximumEntitySize
-			value: (2 ** 25)
+			value: (2 ** 26)
 			during: 
 				[ ZnDefaultCharacterEncoder 
 					value: (ZnCharacterEncoder newForEncoding: #'null')
