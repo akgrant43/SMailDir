@@ -13,7 +13,8 @@
 		"trashBoxName",
 		"indexMutex",
 		"process",
-		"reindexDate"
+		"reindexDate",
+		"autoIndex"
 	],
 	"name" : "MDKeywordIndex",
 	"type" : "normal"

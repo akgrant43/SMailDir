@@ -5,4 +5,4 @@ addKeyword: aString
 
 	keyword := aString trimBoth.
 	self assert: (keyword allSatisfy: [ :each | each isAlphaNumeric ]).
-	indexMutex critical: [ index at: keyword put: Set new ].
+	indexMutex critical: [ index at: keyword ifAbsentPut: Set new ].
