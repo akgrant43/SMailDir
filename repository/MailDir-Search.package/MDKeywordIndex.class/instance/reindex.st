@@ -4,6 +4,7 @@ reindex
 
 	| searchTerms dateFrom |
 
+	self keywords ifEmpty: [ ^self ].
 	dateFrom := MDSearchDateAfter new 
 		date: reindexDate;
 		yourself.
