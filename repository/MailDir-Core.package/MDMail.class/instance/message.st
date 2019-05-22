@@ -4,9 +4,9 @@ message
 	Emails should assume ascii as the default encoding."
 
 	^self file binaryReadStreamDo: [ :bstream |
-		ZnMaximumEntitySize
+		"ZnMaximumEntitySize
 			value: (2 ** 26)
 			during: 
-				[ ZnDefaultCharacterEncoder 
+				[" ZnDefaultCharacterEncoder 
 					value: (ZnCharacterEncoder newForEncoding: #'null')
-					during: [ ZnMimePart readFrom: (AkgMimeStream on: bstream) ] ] ].
+					during: [ ZnMimePart readFrom: (AkgMimeStream on: bstream) ] ] "]".
