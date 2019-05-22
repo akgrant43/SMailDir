@@ -2,4 +2,4 @@ enumerating
 wordsDo: aBlock
 	"Evaluate aBlock for each of the receivers words"
 
-	self children wordsDo: aBlock
+	self children do: [ :child | child wordsDo: aBlock ]
