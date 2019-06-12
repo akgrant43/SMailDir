@@ -1,9 +1,10 @@
 searching
 search: expressionString onStream: aStream
 
-	| searchNode |
+	| searchString searchNode |
 
-	searchNode := MDSearchParser new parse: expressionString.
+	searchString := expressionString copyReplaceAll: ':' with: '\:'.
+	searchNode := MDSearchParser new parse: searchString.
 	searchNode isPetit2Failure ifTrue: [ self error: searchNode printString ].
 	autoIndex ifTrue: [ self updateIndexFrom: searchNode ].
 	searchNode index: self.
