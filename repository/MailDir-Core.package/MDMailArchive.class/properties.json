@@ -16,6 +16,7 @@
 		"archiveBoxName",
 		"sentBoxName",
 		"draftsBoxName",
+		"inBoxName",
 		"indexSemaphore"
 	],
 	"name" : "MDMailArchive",
