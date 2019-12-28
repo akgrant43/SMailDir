@@ -8,7 +8,10 @@ moveTo: targetBox
 			ifFalse: [newFile := self copyFileTo: targetBox].
 
 		self boxes do: [:b | b removeMail: self].
-		(self files copyWithout: newFile) do: [:f | f delete].
+		(self files copyWithout: newFile) do: [:f | 
+			[ f delete ]
+				on: FileDoesNotExistException
+				do: [] ].
 		self entries removeAll.
 		targetBox addMail: self.
 		self addBox: targetBox with: newFile]

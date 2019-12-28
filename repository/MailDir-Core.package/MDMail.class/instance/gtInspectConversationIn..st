@@ -2,5 +2,6 @@ inspecting
 gtInspectConversationIn: composite
 	<gtInspectorPresentationOrder: 7>
 
-	^(self conversation gtInspectMessagesIn: composite)
-		title: 'Conversation'
+	self conversation ifNotNil: [ :conv |
+		(conv gtInspectMessagesIn: composite)
+			title: 'Conversation' ]

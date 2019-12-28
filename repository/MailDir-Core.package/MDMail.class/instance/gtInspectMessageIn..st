@@ -2,5 +2,6 @@ inspecting
 gtInspectMessageIn: composite
 	<gtInspectorPresentationOrder: 5>
 
-	^(self message gtInspectPayloadIn: composite)
-		title: 'Message'
+	self file exists ifTrue: 
+		[ (self message gtInspectPayloadIn: composite)
+			title: 'Message' ]
