@@ -1,4 +1,8 @@
 indexing
 indexIntoMessageIdIndex: anEntry
-	
-	self mailIdIndex at: anEntry messageId put: anEntry.
+
+	| oldEntry |
+
+	oldEntry := self mailIdIndex at: anEntry messageId ifAbsentPut: [ anEntry ].
+	oldEntry == anEntry ifFalse: [ 
+		self halt. ]
