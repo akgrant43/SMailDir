@@ -13,16 +13,18 @@ synchronizeOwnMessageEntries
 		rejectedEntries do: [:e | e wasRemovedFrom: self].
 		self mails: (self mails copyWithoutAll: rejectedEntries).
 	
-		filesToBeAdded do: [:file | | entry |
-			file size > 0 ifTrue:
-				[ entry := MDMail newAt: file in: self.
-					(self mailArchive hasMessageEntryForId: entry messageId)
-						ifTrue: [entry := self mailArchive messageEntryForId: entry messageId ifAbsent: [].
+		filesToBeAdded do: [ :file | | entry |
+			"A separate process might delete the file while we're processing"
+			[ file size > 0 ifTrue: [ 
+				entry := MDMail newAt: file in: self.
+				(self mailArchive hasMessageEntryForId: entry messageId)
+					ifTrue: [entry := self mailArchive messageEntryForId: entry messageId ifAbsent: [].
 							entry wasMovedTo: self as: file.
 							self addMail: entry]
-						ifFalse: [self addMail: entry.
-							self mailArchive indexEntry: entry]]]].
+					ifFalse: [self addMail: entry.
+							self mailArchive indexEntry: entry]]]
+				on: FileDoesNotExistException
+				do: []]].
 
 	Processor yield.
 	self changed.
-	
