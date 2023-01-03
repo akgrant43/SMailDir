@@ -2,8 +2,7 @@ inspecting
 gtMessageFor: aView
 	<gtView>
 
-	^((GtDocument forMDMail: self)
-		gtTextFor: aView)
-			priority: 1;
-			title: 'Message';
-			yourself.
+	^ aView textEditor
+		title: 'Message';
+		priority: 10;
+		text: [ (AkgMdMailVisitor new visitNode: self) text ]
