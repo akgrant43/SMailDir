@@ -1,5 +1,0 @@
-mail list
-getSelectedEntry
-	
-	^ selectedElement
-	

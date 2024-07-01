@@ -1,4 +1,0 @@
-accessing
-smtpServerPort
-
-	^ smtpServerPort

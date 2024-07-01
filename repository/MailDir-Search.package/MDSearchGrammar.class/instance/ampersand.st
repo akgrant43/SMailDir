@@ -1,4 +1,0 @@
-grammar
-ampersand 
-
-	^$& asPParser

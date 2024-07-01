@@ -1,4 +1,0 @@
-accessing
-userEmailAddress
-
-	^ userEmailAddress

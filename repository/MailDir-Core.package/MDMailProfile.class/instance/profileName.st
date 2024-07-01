@@ -1,4 +1,0 @@
-accessing
-profileName
-
-	^ profileName ifNil: ['']

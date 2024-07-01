@@ -1,4 +1,0 @@
-private
-invalidateSenderNames 
-
-	senderNamesString := nil.

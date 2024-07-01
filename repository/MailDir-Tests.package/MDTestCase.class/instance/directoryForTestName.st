@@ -1,4 +1,0 @@
-accessing
-directoryForTestName
-	
-	^ 'mdTestArchive121'

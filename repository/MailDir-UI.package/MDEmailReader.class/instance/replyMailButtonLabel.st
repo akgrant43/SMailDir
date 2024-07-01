@@ -1,4 +1,0 @@
-toolbuilder
-replyMailButtonLabel
-
-	^ 'reply' translated

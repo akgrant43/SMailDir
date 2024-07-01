@@ -1,4 +1,0 @@
-ui
-mailListIcon
-
-	^ nil

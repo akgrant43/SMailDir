@@ -1,4 +1,0 @@
-meta information
-sender
-
-	^ sender 

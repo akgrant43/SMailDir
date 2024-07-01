@@ -1,4 +1,0 @@
-accessing
-flagSeparator
-
-	^ flagSeparator ifNil: [$:]

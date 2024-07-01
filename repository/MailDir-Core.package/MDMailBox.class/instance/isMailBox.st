@@ -1,4 +1,0 @@
-testing
-isMailBox
-
-	^ true

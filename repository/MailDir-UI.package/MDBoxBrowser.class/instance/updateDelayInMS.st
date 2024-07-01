@@ -1,4 +1,0 @@
-updating
-updateDelayInMS
-
-	^ 100
