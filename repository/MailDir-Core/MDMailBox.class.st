@@ -1,16 +1,17 @@
 Class {
-	#name : #MDMailBox,
-	#superclass : #Object,
+	#name : 'MDMailBox',
+	#superclass : 'Object',
 	#instVars : [
 		'fileDirectory',
 		'mailArchive',
 		'subBoxes',
 		'mails'
 	],
-	#category : 'MailDir-Core'
+	#category : 'MailDir-Core',
+	#package : 'MailDir-Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MDMailBox class >> fromSton: stonReader [
 
 	| mailBox |
@@ -23,7 +24,7 @@ MDMailBox class >> fromSton: stonReader [
 	^mailBox
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MDMailBox class >> newFor: aFileDirectory in: aMailArchive [
 
 	^ self new
@@ -34,7 +35,7 @@ MDMailBox class >> newFor: aFileDirectory in: aMailArchive [
 		yourself		
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMailBox >> addMail: anEntry [
 
 	self mails add: anEntry.
@@ -42,33 +43,33 @@ MDMailBox >> addMail: anEntry [
 	self changed
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailBox >> allBoxes [
 	
 	^ {self} , (self subBoxes gather: [:box | box allBoxes])
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMailBox >> allMails [
 
 	^ self mails , (self subBoxes gather: [:b | b allMails])
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMailBox >> allMailsDo: aBlock [
 
 	self mails do: aBlock.
 	self subBoxes do: aBlock
 ]
 
-{ #category : #files }
+{ #category : 'files' }
 MDMailBox >> allMessageFileEntries [
 
 	^ self newMessagesDirectory children , self currentMessagesDirectory children
 	
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMailBox >> asStonDictionary [
 
 	| dictionary |
@@ -79,13 +80,13 @@ MDMailBox >> asStonDictionary [
 	^dictionary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailBox >> boxName [
 
 	^ (self fileDirectory basename findTokens: '.') last
 ]
 
-{ #category : #boxes }
+{ #category : 'boxes' }
 MDMailBox >> boxNamed: aRelativeBoxName [
 
 	| boxNameParts |
@@ -94,13 +95,13 @@ MDMailBox >> boxNamed: aRelativeBoxName [
 	^ (self subBoxes detect: [:b | b boxName = boxNameParts first]) boxNamed: (boxNameParts allButFirst joinSeparatedBy: '.')
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMailBox >> conversations [
 
 	^ MDMailConversation conversationsIn: self allMails
 ]
 
-{ #category : #boxes }
+{ #category : 'boxes' }
 MDMailBox >> createSubBoxNamed: aString [ 
 	
 	| directoryName boxDirectory |
@@ -112,31 +113,31 @@ MDMailBox >> createSubBoxNamed: aString [
 	self synchronizeSubBoxes.
 ]
 
-{ #category : #files }
+{ #category : 'files' }
 MDMailBox >> currentMessagesDirectory [
 
 	^ self fileDirectory / 'cur'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailBox >> fileDirectory [
 
 	^ fileDirectory
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailBox >> fileDirectory: anObject [
 
 	fileDirectory := anObject
 ]
 
-{ #category : #files }
+{ #category : 'files' }
 MDMailBox >> fullBoxName [
 
 	^ self fileDirectory basename
 ]
 
-{ #category : #inspector }
+{ #category : 'inspector' }
 MDMailBox >> gtInspectMessagesIn: composite [
 	<gtInspectorPresentationOrder: 50> 
 
@@ -158,7 +159,7 @@ MDMailBox >> gtInspectMessagesIn: composite [
 
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 MDMailBox >> gtMessagesFor: aView [
 
 	<gtView>
@@ -173,7 +174,7 @@ MDMailBox >> gtMessagesFor: aView [
 		  send: [ :result | result ]
 ]
 
-{ #category : #inspector }
+{ #category : 'inspector' }
 MDMailBox >> humanDateStringFor: aDateAndTime [
 
 	| localTime |
@@ -186,13 +187,13 @@ MDMailBox >> humanDateStringFor: aDateAndTime [
 		[ localTime asDate printFormat: #(1 2 3 $  2 1) ]
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 MDMailBox >> initialize [
 
 	self subBoxes: OrderedCollection new
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 MDMailBox >> initializeMessageEntries [
 
 	self 
@@ -202,7 +203,7 @@ MDMailBox >> initializeMessageEntries [
 
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMailBox >> interactiveCreateSubBox [
 
 	<rackOperationLabel: 'create box' inContextMenus: true>
@@ -213,7 +214,7 @@ MDMailBox >> interactiveCreateSubBox [
 	self createSubBoxNamed: boxName withBlanksTrimmed.
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMailBox >> interactiveSetAllMailsRead [
 
 	<rackOperationLabel: 'set all as read' inContextMenus: true>
@@ -222,7 +223,7 @@ MDMailBox >> interactiveSetAllMailsRead [
 	
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMailBox >> interactiveSynchronize [
 
 	<rackOperationLabel: 'synchronize' inContextMenus: true>
@@ -230,43 +231,43 @@ MDMailBox >> interactiveSynchronize [
 	[self mailArchive synchronize] forkAt: Processor userBackgroundPriority
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MDMailBox >> isCollection [
 
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MDMailBox >> isEmail [
 
 	^ false
 ]
 
-{ #category : #collection }
+{ #category : 'collection' }
 MDMailBox >> isEmpty [
 
 	^ self mails isEmpty and: [self subBoxes isEmpty]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MDMailBox >> isMailBox [
 
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailBox >> mailArchive [
 
 	^ mailArchive
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailBox >> mailArchive: anObject [
 
 	mailArchive := anObject
 ]
 
-{ #category : #ui }
+{ #category : 'ui' }
 MDMailBox >> mailListIcon [
 
 	^ ToolIcons iconNamed: ((self allMails anySatisfy: [:m | m isUnread ])
@@ -274,31 +275,31 @@ MDMailBox >> mailListIcon [
 		ifFalse: [#blank])
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMailBox >> mails [
 
 	^ mails
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailBox >> mails: anObject [
 
 	mails := anObject
 ]
 
-{ #category : #files }
+{ #category : 'files' }
 MDMailBox >> newMessagesDirectory [
 
 	^ self fileDirectory / 'new'
 ]
 
-{ #category : #collection }
+{ #category : 'collection' }
 MDMailBox >> notEmpty [
 
 	^ self isEmpty not
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMailBox >> openMailSorter [
 
 	<rackOperationLabel: 'open mail sorter' inContextMenus: true>
@@ -306,19 +307,19 @@ MDMailBox >> openMailSorter [
 	MDEmailSorter openOn: self mailArchive
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMailBox >> openRackStandardMorph [
 
 	MDBoxBrowser openOnBox: self
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MDMailBox >> printOn: aStream [
 
 	^ aStream nextPutAll: self boxName
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMailBox >> removeMail: anEntry [
 	
 	self mails remove: anEntry ifAbsent: [].
@@ -326,21 +327,21 @@ MDMailBox >> removeMail: anEntry [
 	self changed.
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMailBox >> setAllMailsRead [
 
 	(self allMails select: [:m | m isUnread ]) do: [:m | m setRead].
 	self changed.
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMailBox >> stonOn: stonWriter [
 
 	stonWriter writeObject: self streamShortList: [ :array |
 		array add: self asStonDictionary ]
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMailBox >> storeMail: aMailMessage [
 
 	^ self mailArchive
@@ -348,19 +349,19 @@ MDMailBox >> storeMail: aMailMessage [
 		in: self. 
 ]
 
-{ #category : #boxes }
+{ #category : 'boxes' }
 MDMailBox >> subBoxes [
 
 	^ subBoxes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailBox >> subBoxes: anObject [
 
 	subBoxes := anObject
 ]
 
-{ #category : #synchronization }
+{ #category : 'synchronization' }
 MDMailBox >> synchronizeMessageEntries [
 
 	self subBoxes do: [:b | b synchronizeMessageEntries].
@@ -368,7 +369,7 @@ MDMailBox >> synchronizeMessageEntries [
 	
 ]
 
-{ #category : #synchronization }
+{ #category : 'synchronization' }
 MDMailBox >> synchronizeOwnMessageEntries [
 
 	| currentFiles entriesToBeRemoved filesToBeAdded mailFiles rejectedEntries |
@@ -401,7 +402,7 @@ MDMailBox >> synchronizeOwnMessageEntries [
 
 ]
 
-{ #category : #synchronization }
+{ #category : 'synchronization' }
 MDMailBox >> synchronizeSubBoxes [
 
 	| allSubBoxNames namesOfDirectSubBoxes existingBoxes addedBoxNames removedBoxNames |
@@ -426,13 +427,13 @@ MDMailBox >> synchronizeSubBoxes [
 	self changed.
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMailBox >> worldIconMorph [
 
 	^ ((RIcons icons8Inbox64px2Icon) scaledToSize: 35@35) asMorph
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMailBox >> worldIconText [
 
 	^ self mailArchive archiveName , ' ' , self boxName , String crlf , 

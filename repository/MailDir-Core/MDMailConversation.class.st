@@ -1,16 +1,17 @@
 Class {
-	#name : #MDMailConversation,
-	#superclass : #Object,
+	#name : 'MDMailConversation',
+	#superclass : 'Object',
 	#instVars : [
 		'startMail',
 		'mails',
 		'archive',
 		'senderNamesString'
 	],
-	#category : 'MailDir-Core'
+	#category : 'MailDir-Core',
+	#package : 'MailDir-Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MDMailConversation class >> conversationsIn: aCollectionOfMails [
 	"Answer the set of conversations in aCollectionOfMails.
 	All mails must be in the same archive."
@@ -28,7 +29,7 @@ MDMailConversation class >> conversationsIn: aCollectionOfMails [
 	
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MDMailConversation class >> fromSton: stonReader [
 
 	| conversation |
@@ -41,14 +42,14 @@ MDMailConversation class >> fromSton: stonReader [
 	^conversation
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 MDMailConversation >> = anotherConversation [
 
 	^ anotherConversation isMailConversation 
 		and: [self startMail = anotherConversation startMail]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailConversation >> addMail: aMail [
 	
 	self invalidateSenderNames.
@@ -56,19 +57,19 @@ MDMailConversation >> addMail: aMail [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailConversation >> archive [
 
 	^ archive
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailConversation >> archive: anObject [
 
 	archive := anObject
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMailConversation >> asStonDictionary [
 
 	| dictionary |
@@ -79,13 +80,13 @@ MDMailConversation >> asStonDictionary [
 	^dictionary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailConversation >> date [
 
 	^ self newestDate
 ]
 
-{ #category : #inspector }
+{ #category : 'inspector' }
 MDMailConversation >> gtInspectMessagesIn: composite [
 	<gtInspectorPresentationOrder: 5> 
 
@@ -107,19 +108,19 @@ MDMailConversation >> gtInspectMessagesIn: composite [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MDMailConversation >> hasBeenRead [
 
 	^ self mails allSatisfy: [:m | m hasBeenRead]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 MDMailConversation >> hash [
 
 	^ self startMail hash
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MDMailConversation >> humanDateStringFor: aDateAndTime [
 
 	| localTime |
@@ -132,19 +133,19 @@ MDMailConversation >> humanDateStringFor: aDateAndTime [
 		[ localTime asDate printFormat: #(1 2 3 $  2 1) ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MDMailConversation >> includes: aMail [
 
 	^ self mails includes: aMail
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 MDMailConversation >> initialize [
 
 	self mails: OrderedCollection new
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMailConversation >> interactiveArchiveMessage [
 
 	<rackOperationLabel: 'archive conversation' inContextMenus: true>
@@ -152,7 +153,7 @@ MDMailConversation >> interactiveArchiveMessage [
 	self moveToArchive
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMailConversation >> interactiveSetToRead [
 
 	<rackOperationLabel: 'mark all messages read' inContextMenus: true>
@@ -160,7 +161,7 @@ MDMailConversation >> interactiveSetToRead [
 	self setRead
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMailConversation >> interactiveTrashMessage [
 
 	<rackOperationLabel: 'move to trash' inContextMenus: true>
@@ -168,43 +169,43 @@ MDMailConversation >> interactiveTrashMessage [
 	self moveToTrash
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MDMailConversation >> invalidateSenderNames [ 
 
 	senderNamesString := nil.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MDMailConversation >> isCollection [ 
 
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MDMailConversation >> isDeletedFromSystem [
 	
 	^ self mails allSatisfy: [:m | m isDeletedFromSystem]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MDMailConversation >> isImportant [
 
 	^ self mails anySatisfy: [:m | m isImportant]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MDMailConversation >> isMailConversation [ 
 
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MDMailConversation >> isUnread [
 
 	^ self mails anySatisfy: [:m | m isUnread]
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMailConversation >> latestMail [
 
 	| a allMails latestMail |
@@ -214,7 +215,7 @@ MDMailConversation >> latestMail [
 	^ latestMail
 ]
 
-{ #category : #ui }
+{ #category : 'ui' }
 MDMailConversation >> mailListIcon [
 
 	^ ToolIcons iconNamed: 
@@ -223,39 +224,39 @@ MDMailConversation >> mailListIcon [
 			ifFalse: [self isUnread ifTrue: [#testOrange] ifFalse: [#blank]])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailConversation >> mails [
 
 	^ mails select: [:m | (m boxes = {self archive trashBox}) not]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailConversation >> mails: anObject [
 
 	self invalidateSenderNames.
 	mails := anObject
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMailConversation >> moveTo: aBox [
 
 	self mails do: [:m | m moveTo: aBox]
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMailConversation >> moveToArchive [
 	
 	self setRead.
 	mails do: [:m | m moveToArchive]
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMailConversation >> moveToTrash [
 
 	mails do: [:m | m moveToTrash]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailConversation >> newestDate [
 
 	^ (self mails collect: [:m | m date])
@@ -263,26 +264,26 @@ MDMailConversation >> newestDate [
 		ifNotEmptyDo: [:dates | dates max]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MDMailConversation >> notEmpty [ 
 
 	^ self mails notEmpty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailConversation >> oldestDate [
 
 	^ (self mails collect: [:m | m date]) min
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMailConversation >> openRackStandardMorph [
 
 	self setRead.
 	^ self mails last openRackStandardMorph
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MDMailConversation >> printOn: aStream [
 	
 	self printSenderNamesOn: aStream.
@@ -291,7 +292,7 @@ MDMailConversation >> printOn: aStream [
 
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MDMailConversation >> printSenderNamesOn: aStream [
 
 	| max senderNames |
@@ -308,7 +309,7 @@ MDMailConversation >> printSenderNamesOn: aStream [
 			ifTrue: [(String streamContents: [:s | s nextPutAll: senderNamesString] limitedTo: max-2),'..'])
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MDMailConversation >> printSenderOn: aStream [
 
 	| max |
@@ -319,7 +320,7 @@ MDMailConversation >> printSenderOn: aStream [
 			ifTrue: [(String streamContents: [:s | s nextPutAll: self startMail sender] limitedTo: max-2),'..'])
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MDMailConversation >> printSubjectOn: aStream [
 
 	| max |
@@ -330,61 +331,61 @@ MDMailConversation >> printSubjectOn: aStream [
 			ifTrue: [(String streamContents: [:s | s nextPutAll: self startMail subject] limitedTo: max-2),'..'])
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMailConversation >> removeMail: aMail [
 
 	self invalidateSenderNames.
 	mails remove: aMail ifAbsent: [].
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MDMailConversation >> sender [
 
 	^ self mails first sender
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MDMailConversation >> senderName [
 
 	^ self mails first senderName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailConversation >> senderNames [
 
 	^ ', ' join: (self mails collect: [:ea | ea senderName]) asSet
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailConversation >> senderNamesString [
 	^ senderNamesString
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMailConversation >> senderNamesString: aString [
 
 	senderNamesString := aString
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMailConversation >> setRead [
 
 	self mails do: [:m | m setRead]
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMailConversation >> setUnread [
 
 	self mails do: [:m | m setUnread]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailConversation >> size [
 
 	^ self mails size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailConversation >> startMail [
 
 	| links |
@@ -394,7 +395,7 @@ MDMailConversation >> startMail [
 	^ (links detect: [:l | links noneSatisfy: [:l2 | l2 first = l second] ]) third
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailConversation >> startMail: aMail [
 
 	mails add: aMail
@@ -402,20 +403,20 @@ MDMailConversation >> startMail: aMail [
 
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMailConversation >> stonOn: stonWriter [
 
 	stonWriter writeObject: self streamShortList: [ :array |
 		array add: self asStonDictionary ]
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MDMailConversation >> subject [
 
 	^ self mails first subject
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMailConversation >> worldIconMorph [
 	
 	^ (RIcons icons8GroupMessage64pxIcon scaledToSize: 35@35) asMorph

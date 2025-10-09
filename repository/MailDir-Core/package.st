@@ -1,1 +1,1 @@
-Package { #name : #'MailDir-Core' }
+Package { #name : 'MailDir-Core' }

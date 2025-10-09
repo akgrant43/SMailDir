@@ -11,8 +11,8 @@ The interface for managing the MDMails is separated into two categories:
 While conceptually all data is always read from disk, this quickly becomes infeasible regarding response times. Thus, most of the meta information about the message (recipient, subject, date, read status, important flag, ...) are cached in instance variables. While most message properties do not change, special attention has to be given to the flags caching.
 "
 Class {
-	#name : #MDMail,
-	#superclass : #Object,
+	#name : 'MDMail',
+	#superclass : 'Object',
 	#instVars : [
 		'header',
 		'subject',
@@ -33,16 +33,17 @@ Class {
 	#classVars : [
 		'FileNameCounter'
 	],
-	#category : 'MailDir-Core'
+	#category : 'MailDir-Core',
+	#package : 'MailDir-Core'
 }
 
-{ #category : #caching }
+{ #category : 'caching' }
 MDMail class >> clearHeaders [
 
 	self allInstancesDo: [:m | m header: nil]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MDMail class >> fromSton: stonReader [
 
 	| mail |
@@ -55,7 +56,7 @@ MDMail class >> fromSton: stonReader [
 	^mail
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MDMail class >> newAt: file in: aBox [
 
 	^ self new
@@ -64,7 +65,7 @@ MDMail class >> newAt: file in: aBox [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MDMail class >> newFor: aMailMessage in: aBox [
 	
 	^ self new
@@ -74,20 +75,20 @@ MDMail class >> newFor: aMailMessage in: aBox [
 		yourself
 ]
 
-{ #category : #flags }
+{ #category : 'flags' }
 MDMail >> = anotherMail [
 
 	^ anotherMail isEmail and: [self messageId = anotherMail messageId]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MDMail >> addBox: aBox with: aFile [
 
 	mailArchive := aBox mailArchive. "This is only necessary as a performance improvement. --pre"
 	^ self entries at: aBox put: aFile
 ]
 
-{ #category : #flags }
+{ #category : 'flags' }
 MDMail >> addOrdinaryFlag: aCharacter [
 
 	(self flags includes: aCharacter) ifTrue: [^ self]. 
@@ -95,7 +96,7 @@ MDMail >> addOrdinaryFlag: aCharacter [
 	^ self modifyFlags: [:flags | flags asSet , {aCharacter}]
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMail >> asStonDictionary [
 
 	| dictionary |
@@ -106,38 +107,38 @@ MDMail >> asStonDictionary [
 	^dictionary
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MDMail >> boxes [
 	
 	^ self entries keys
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MDMail >> cc [
 
 	^ cc
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMail >> cc: aString [
 
 	cc := aString
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 MDMail >> changed [
 
 	super changed.
 	^ self boxes do: [:b | b changed]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMail >> conversation [
 
 	^ self mailArchive conversationForId: self messageId ifAbsent: []
 ]
 
-{ #category : #files }
+{ #category : 'files' }
 MDMail >> copyFileTo: aBox [
 
 	| directory newFile |	
@@ -151,20 +152,20 @@ MDMail >> copyFileTo: aBox [
 	^ newFile
 ]
 
-{ #category : #'accessing structure variables' }
+{ #category : 'accessing structure variables' }
 MDMail >> date [
 	"Answer a DateAndTime for the receiver"
 
 	^date
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMail >> date: aDateAndTime [
 
 	date := aDateAndTime
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MDMail >> decodedHeaderField: fieldName [
 	"Answer the header field decoded as a Mime Encoded-Word.
 	The header must have been already cached."
@@ -178,49 +179,49 @@ MDMail >> decodedHeaderField: fieldName [
 	^MimeEncodedWord decodeString: value trimBoth.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MDMail >> entries [
 	
 	^ entries
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MDMail >> entries: aDictionary [
 
 	entries := aDictionary
 ]
 
-{ #category : #files }
+{ #category : 'files' }
 MDMail >> file [
 
 	^ self files first
 ]
 
-{ #category : #files }
+{ #category : 'files' }
 MDMail >> fileIn: aBox [
 
 	^ self entries at: aBox
 ]
 
-{ #category : #files }
+{ #category : 'files' }
 MDMail >> fileIn: aBox ifAbsent: aBlock [
 
 	^ self entries at: aBox ifAbsent: aBlock
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MDMail >> files [
 	
 	^ self entries values
 ]
 
-{ #category : #flags }
+{ #category : 'flags' }
 MDMail >> flagSeparator [
 
 	^ self mailArchive flagSeparator
 ]
 
-{ #category : #flags }
+{ #category : 'flags' }
 MDMail >> flags [
 
 	"The following code is a performance optimization as this method gets called a LOT
@@ -235,7 +236,7 @@ MDMail >> flags [
 	^ fileName copyFrom: normalFlagIndex + 2 to: fileNameSize
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MDMail >> generateFileNameFor: aMessage [
 
 	^ String streamContents: [ :stream | stream
@@ -252,7 +253,7 @@ MDMail >> generateFileNameFor: aMessage [
 		<< '2,' ]
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 MDMail >> gtAttachmentsFor: aView [
 	<gtView>
 
@@ -263,7 +264,7 @@ MDMail >> gtAttachmentsFor: aView [
 		view: #gtLiveFor:
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 MDMail >> gtHeadersFor: aView [
 	<gtView>
 
@@ -274,7 +275,7 @@ MDMail >> gtHeadersFor: aView [
 		view: #gtHeadersFor:
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 MDMail >> gtInspectConversationIn: composite [
 	<gtInspectorPresentationOrder: 7>
 
@@ -283,7 +284,7 @@ MDMail >> gtInspectConversationIn: composite [
 			title: 'Conversation' ]
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 MDMail >> gtInspectMessageIn: composite [
 	<gtInspectorPresentationOrder: 5>
 
@@ -292,7 +293,7 @@ MDMail >> gtInspectMessageIn: composite [
 			title: 'Message' ]
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 MDMail >> gtMessageFor: aView [
 	<gtView>
 
@@ -302,20 +303,20 @@ MDMail >> gtMessageFor: aView [
 		text: [ (AkgMdMailVisitor new visitNode: self) text ]
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MDMail >> hasBeenRead [
 	
 	^ self hasBeenSeen
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MDMail >> hasBeenSeen [
 	
 	hasBeenSeen ifNil: [hasBeenSeen := self flags includes: $S].
 	^ hasBeenSeen
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMail >> header [
 	"Read the header records from the receiver's file.
 	Don't cache to reduce memory."
@@ -338,25 +339,25 @@ MDMail >> header [
 "
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMail >> header: anObject [
 
 	header := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMail >> inReplyTo [
 
 	^inReplyTo
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMail >> inReplyTo: messageIdString [
 
 	inReplyTo := messageIdString
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 MDMail >> initialize [
 
 	super initialize.
@@ -365,7 +366,7 @@ MDMail >> initialize [
 	fileAccessMutex := Mutex new.
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 MDMail >> initializeFileFor: aMessage [
 
 	| fileName folder |
@@ -377,7 +378,7 @@ MDMail >> initializeFileFor: aMessage [
 	self addBox: self boxes first with: fileName
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 MDMail >> initializeHeaderInformation [
 
 	header := self header.
@@ -392,7 +393,7 @@ MDMail >> initializeHeaderInformation [
 	header := nil. "To make space for other data"
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 MDMail >> initializeSenderName [
 
 	| nameAndAddress |
@@ -406,7 +407,7 @@ MDMail >> initializeSenderName [
 	senderAddress := nameAndAddress second
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMail >> interactiveArchiveMessage [
 
 	<rackOperationLabel: 'archive message' inContextMenus: true>
@@ -414,7 +415,7 @@ MDMail >> interactiveArchiveMessage [
 	self moveToArchive
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMail >> interactiveToggleReadMessage [
 
 	<rackOperationLabel: 'toggle read status' inContextMenus: true>
@@ -424,7 +425,7 @@ MDMail >> interactiveToggleReadMessage [
 		ifFalse: [self setRead]
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMail >> interactiveTrashMessage [
 
 	<rackOperationLabel: 'move to trash' inContextMenus: true>
@@ -432,25 +433,25 @@ MDMail >> interactiveTrashMessage [
 	self moveToTrash
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MDMail >> isAlreadyInBox: targetBox [
 	
 	^ (self boxes includes: targetBox) and: [targetBox mails includes: self]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MDMail >> isDeletedFromSystem [
 	
 	^ self entries isEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MDMail >> isEmail [
 
 	^ true
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MDMail >> isImportant [
 	
 	isImportant ifNil: [isImportant := self flags includes: $F].
@@ -458,39 +459,39 @@ MDMail >> isImportant [
 	
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MDMail >> isStoredInAnyBox [
 
 	^ self entries notEmpty
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MDMail >> isUnread [
 
 	^ self hasBeenRead not
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMail >> mailArchive [
 
 	^ mailArchive ifNil: ["This is only necessary as a performance improvement. --pre"
 		mailArchive := self boxes first mailArchive]
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMail >> mailArchive: anArchive [
 
 	mailArchive := anArchive
 ]
 
-{ #category : #ui }
+{ #category : 'ui' }
 MDMail >> mailListIcon [
 
 	^ ToolIcons iconNamed: 
 		(self isUnread ifTrue: [#testOrange] ifFalse: [#blank])
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMail >> message [
 	"Answer the MIME document of the receiver.
 	Emails should assume ascii as the default encoding."
@@ -509,19 +510,19 @@ MDMail >> message [
 
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MDMail >> messageId [
 
 	^ messageId
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMail >> messageId: aString [
 
 	messageId := aString
 ]
 
-{ #category : #flags }
+{ #category : 'flags' }
 MDMail >> modifyFlags: aBlock [
 
 	| messageParts fileName flags flagsString flagParts |
@@ -544,7 +545,7 @@ MDMail >> modifyFlags: aBlock [
 	
 ]
 
-{ #category : #files }
+{ #category : 'files' }
 MDMail >> moveFile: aFile within: aBox [
 
 	| directory |
@@ -557,7 +558,7 @@ MDMail >> moveFile: aFile within: aBox [
 	^ self renameFile: aFile to: (directory / self file basename).
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMail >> moveTo: targetBox [
 	"Moves the mail message completely to the new folder"
 
@@ -576,19 +577,19 @@ MDMail >> moveTo: targetBox [
 		self addBox: targetBox with: newFile]
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMail >> moveToArchive [
 
 	self moveTo: self mailArchive archiveBox
 ]
 
-{ #category : #mails }
+{ #category : 'mails' }
 MDMail >> moveToTrash [
 	
 	self moveTo: self mailArchive trashBox
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MDMail >> nextFileNameCounter [
 	"Increment and answer the filename counter"
 
@@ -597,14 +598,14 @@ MDMail >> nextFileNameCounter [
 	
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMail >> openRackStandardMorph [
 
 	self setRead.
 	^ self message openRackStandardMorph.
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MDMail >> printOn: aStream [
 	
 	self printSenderNameOn: aStream.
@@ -613,7 +614,7 @@ MDMail >> printOn: aStream [
 
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MDMail >> printSenderNameOn: aStream [
 
 	| max |
@@ -624,7 +625,7 @@ MDMail >> printSenderNameOn: aStream [
 			ifTrue: [(String streamContents: [:s | s nextPutAll: self senderName] limitedTo: max-2),'..'])
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MDMail >> printSenderOn: aStream [
 
 	| max |
@@ -635,7 +636,7 @@ MDMail >> printSenderOn: aStream [
 			ifTrue: [(String streamContents: [:s | s nextPutAll: self sender] limitedTo: max-2),'..'])
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MDMail >> printSubjectOn: aStream [
 
 	| max |
@@ -649,19 +650,19 @@ MDMail >> printSubjectOn: aStream [
 				ifTrue: [(String streamContents: [:s | s nextPutAll: self subject] limitedTo: max-2),'..']) ]
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MDMail >> recipients [
 
 	^ recipients
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMail >> recipients: aString [
 
 	recipients := aString
 ]
 
-{ #category : #flags }
+{ #category : 'flags' }
 MDMail >> removeOrdinaryFlag: aCharacter [
 
 	(self flags includes: aCharacter) ifFalse: [^ self]. 
@@ -669,7 +670,7 @@ MDMail >> removeOrdinaryFlag: aCharacter [
 	^ self modifyFlags: [:flags | flags asSet copyWithout: aCharacter]
 ]
 
-{ #category : #files }
+{ #category : 'files' }
 MDMail >> renameFile: fromFileReference to: toFileReference [
 	"Rename aFile to fileName"
 	fileAccessMutex critical: [
@@ -678,51 +679,51 @@ MDMail >> renameFile: fromFileReference to: toFileReference [
 	^toFileReference 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MDMail >> resetFlagsCaches [
 
 	isImportant := hasBeenSeen := nil
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MDMail >> sender [
 
 	^ sender 
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMail >> sender: aString [
 
 	sender := aString
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MDMail >> senderAddress [
 
 	senderAddress ifNil: [self initializeSenderName].
 	^ senderAddress
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMail >> senderAddress: aString [
 
 	senderAddress := aString
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MDMail >> senderName [
 
 	senderName ifNil: [self initializeSenderName].
 	^ senderName
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMail >> senderName: aString [
 
 	senderName := aString
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MDMail >> setImportant [
 	
 	isImportant := true.
@@ -731,7 +732,7 @@ MDMail >> setImportant [
 	self changed.
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MDMail >> setRead [
 	
 	hasBeenSeen := true.
@@ -748,7 +749,7 @@ MDMail >> setRead [
 	self changed.
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MDMail >> setUnimportant [
 	
 	isImportant := false.
@@ -757,7 +758,7 @@ MDMail >> setUnimportant [
 	self changed.
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MDMail >> setUnread [
 	
 	hasBeenSeen := false.
@@ -774,26 +775,26 @@ MDMail >> setUnread [
 	self changed.
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMail >> stonOn: stonWriter [
 
 	stonWriter writeObject: self streamShortList: [ :array |
 		array add: self asStonDictionary ]
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MDMail >> subject [
 
 	^ subject
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMail >> subject: aString [
 
 	subject := aString
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MDMail >> timestampFrom: aString [
 	"Answer a DateAndTime from aString"
 
@@ -826,7 +827,7 @@ MDMail >> timestampFrom: aString [
 		offset: offset.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MDMail >> wasMovedTo: aBox as: aFile [
 
 	fileAccessMutex critical: [
@@ -834,7 +835,7 @@ MDMail >> wasMovedTo: aBox as: aFile [
 		self addBox: aBox with: aFile] 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MDMail >> wasRemovedFrom: aBox [
 
 	fileAccessMutex critical: [
@@ -843,7 +844,7 @@ MDMail >> wasRemovedFrom: aBox [
 						' from a folder it was not in ' , aBox fileDirectory fullName]].
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMail >> worldIconMorph [
 	| icon |
 	icon := self hasBeenRead
@@ -852,7 +853,7 @@ MDMail >> worldIconMorph [
 	^ (icon scaledToSize: 35@35) asMorph
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMail >> worldIconText [
 
 	^ self subject

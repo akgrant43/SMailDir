@@ -1,14 +1,15 @@
 Class {
-	#name : #MimeEncodedWord,
-	#superclass : #Object,
+	#name : 'MimeEncodedWord',
+	#superclass : 'Object',
 	#classVars : [
 		'Encoders',
 		'QPTranslation'
 	],
-	#category : 'MailDir-Core'
+	#category : 'MailDir-Core',
+	#package : 'MailDir-Core'
 }
 
-{ #category : #decoding }
+{ #category : 'decoding' }
 MimeEncodedWord class >> decodeEncodedWord: aString [
 	"Decode the supplied encoded word.  
 	Don't return an error, just the best possible decoding"
@@ -41,7 +42,7 @@ MimeEncodedWord class >> decodeEncodedWord: aString [
 	^string
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MimeEncodedWord class >> decodeQPString: aString [
 	"Decode the Mime Encoded QP string"
 
@@ -60,7 +61,7 @@ MimeEncodedWord class >> decodeQPString: aString [
 	^resultStream contents
 ]
 
-{ #category : #decoding }
+{ #category : 'decoding' }
 MimeEncodedWord class >> decodeString: aString [
 	"Decode the supplied string, which may contain 0 or more encoded words.
 	Don't raise an error, just the best possible decoding"
@@ -81,7 +82,7 @@ MimeEncodedWord class >> decodeString: aString [
 	^resultStream contents
 ]
 
-{ #category : #encoding }
+{ #category : 'encoding' }
 MimeEncodedWord class >> encodeString: aString coding: coding charSet: charSet [
 
 	| result encoder charEncoded |
@@ -106,7 +107,7 @@ MimeEncodedWord class >> encodeString: aString coding: coding charSet: charSet [
 	^result contents
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MimeEncodedWord class >> findEndOfEncodedWordIn: aString startingAt: start [
 	"Answer the index of the end of the encoded word starting at start,
 	i.e. the index of the trailing '='"
@@ -125,7 +126,7 @@ MimeEncodedWord class >> findEndOfEncodedWordIn: aString startingAt: start [
 	
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 MimeEncodedWord class >> initialize [ 
 
 	Encoders := { 
@@ -139,7 +140,7 @@ MimeEncodedWord class >> initialize [
 		 } asDictionary.
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 MimeEncodedWord class >> writeBase64: charEncoded on: stream [
 	"Write the supplied ByteArray base64 encoded on stream"
 
@@ -147,7 +148,7 @@ MimeEncodedWord class >> writeBase64: charEncoded on: stream [
 	ZnBase64Encoder new encode: charEncoded readStream to: stream
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MimeEncodedWord class >> writeQP: charEncoded on: stream [
 	"Write the supplied ByteArray on stream"
 

@@ -1,6 +1,6 @@
 Class {
-	#name : #MDMailArchive,
-	#superclass : #Object,
+	#name : 'MDMailArchive',
+	#superclass : 'Object',
 	#instVars : [
 		'fileDirectory',
 		'boxes',
@@ -15,17 +15,18 @@ Class {
 		'inBoxName',
 		'indexSemaphore'
 	],
-	#category : 'MailDir-Core'
+	#category : 'MailDir-Core',
+	#package : 'MailDir-Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MDMailArchive class >> archiveIn: aFileDirectory [
 
 	^ self archiveIn: aFileDirectory flagSeparator: nil
 
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MDMailArchive class >> archiveIn: aFileDirectory flagSeparator: aString [
 
 	^ self new
@@ -36,7 +37,7 @@ MDMailArchive class >> archiveIn: aFileDirectory flagSeparator: aString [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MDMailArchive class >> fromFile: aFileReference [
 
 	| index |
@@ -48,7 +49,7 @@ MDMailArchive class >> fromFile: aFileReference [
 	^index
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MDMailArchive class >> fromSton: stonReader [
 
 	| archive |
@@ -61,7 +62,7 @@ MDMailArchive class >> fromSton: stonReader [
 	^archive
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MDMailArchive class >> rebuildAllInstances [
 
 	"MDMailArchive rebuildAllInstances"
@@ -75,7 +76,7 @@ MDMailArchive class >> rebuildAllInstances [
 	MDMail clearHeaders.
 ]
 
-{ #category : #synchronization }
+{ #category : 'synchronization' }
 MDMailArchive class >> startSynchronizationProcess [
 
 	[[self synchronizeAllArchives. 
@@ -83,13 +84,13 @@ MDMailArchive class >> startSynchronizationProcess [
 		forkAt: 30 named: 'mail dir synchronization process'
 ]
 
-{ #category : #synchronization }
+{ #category : 'synchronization' }
 MDMailArchive class >> synchronizationProcessPeriod [
 
 	^ 3 minutes
 ]
 
-{ #category : #synchronization }
+{ #category : 'synchronization' }
 MDMailArchive class >> synchronizeAllArchives [
 
 	self allInstances do: [:a | | inboxSize inbox |
@@ -101,13 +102,13 @@ MDMailArchive class >> synchronizeAllArchives [
 			ifTrue: [SampledSound playSoundNamed: 'croak']]
 ]
 
-{ #category : #boxes }
+{ #category : 'boxes' }
 MDMailArchive >> addBox: aBox named: aRelativeBoxName [
 
 	^ self boxes at: aRelativeBoxName put: aBox
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 MDMailArchive >> addBoxesWithNames: rootBoxNames [
 
 	rootBoxNames do: [ :dirName | | rootBoxName rootBox |
@@ -118,56 +119,56 @@ MDMailArchive >> addBoxesWithNames: rootBoxNames [
 	
 ]
 
-{ #category : #boxes }
+{ #category : 'boxes' }
 MDMailArchive >> allBoxes [
 
 	^ self boxes gather: [:box | box allBoxes]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> allMails [
 
 	^ self boxes gather: [:b | b allMails]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> allMailsDo: aBlock [
 
 	self boxes do: [ :box | box allMailsDo: aBlock]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> archiveBox [
 
 	self archiveBoxName isEmptyOrNil ifTrue: [^ nil].
 	^ self boxNamed: self archiveBoxName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> archiveBoxName [
 
 	^ archiveBoxName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> archiveBoxName: aString [
 
 	archiveBoxName := aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> archiveName [
 
 	^ archiveName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> archiveName: anObject [
 
 	archiveName := anObject
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMailArchive >> asStonDictionary [
 
 	| dictionary convIndex |
@@ -183,7 +184,7 @@ MDMailArchive >> asStonDictionary [
 	^dictionary
 ]
 
-{ #category : #boxes }
+{ #category : 'boxes' }
 MDMailArchive >> boxNamed: aRelativeBoxName [
 
 	| box boxNameParts |
@@ -194,43 +195,43 @@ MDMailArchive >> boxNamed: aRelativeBoxName [
 	^ (self boxes detect: [:b | b boxName = boxNameParts first]) boxNamed: ('.' join: boxNameParts allButFirst)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> boxes [
 
 	^ boxes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> boxes: anObject [
 
 	boxes := anObject
 ]
 
-{ #category : #indexing }
+{ #category : 'indexing' }
 MDMailArchive >> conversationForId: id ifAbsent: absentLogic [
 
 	^ self protectIndexAccessDuring: [self conversationIndex at: id ifAbsent: absentLogic]
 ]
 
-{ #category : #indexing }
+{ #category : 'indexing' }
 MDMailArchive >> conversationIndex [
 
 	^ conversationIndex
 ]
 
-{ #category : #indexing }
+{ #category : 'indexing' }
 MDMailArchive >> conversationIndex: anObject [
 
 	conversationIndex := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> conversations [
 
 	^ MDMailConversation conversationsIn: self allMails
 ]
 
-{ #category : #indexing }
+{ #category : 'indexing' }
 MDMailArchive >> determineStartMailIdFor: anEntry [
 
 	| predecessorId |
@@ -242,50 +243,50 @@ MDMailArchive >> determineStartMailIdFor: anEntry [
 	^ self determineStartMailIdFor: (self messageEntryForId: predecessorId ifAbsent: [^ anEntry messageId])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> draftsBox [
 	
 	^ self boxNamed: self draftsBoxName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> draftsBoxName [
 
 	^ draftsBoxName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> draftsBoxName: anObject [
 
 	draftsBoxName := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> fileDirectory [
 
 	^ fileDirectory
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> fileDirectory: anObject [
 
 	fileDirectory := anObject.
 	self migrateBoxPaths.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> flagSeparator [
 
 	^ flagSeparator ifNil: [$:]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> flagSeparator: aCharacter [
 
 	flagSeparator := aCharacter
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 MDMailArchive >> gtBoxesFor: aView [
 	<gtView>
 
@@ -296,7 +297,7 @@ MDMailArchive >> gtBoxesFor: aView [
 		send: [ :selection | self boxes at: selection ].
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 MDMailArchive >> gtInspectBoxesIn: composite [
 	<gtInspectorPresentationOrder: 5>
 
@@ -305,29 +306,29 @@ MDMailArchive >> gtInspectBoxesIn: composite [
 		display: [ self boxes values sorted: #boxName ascending ]
 ]
 
-{ #category : #indexing }
+{ #category : 'indexing' }
 MDMailArchive >> hasMessageEntryForId: id [
 
 	^ self mailIdIndex includesKey: id
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> inBox [
 	
 	^ self boxNamed: self inBoxName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> inBoxName [
 	^ inBoxName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> inBoxName: anObject [
 	inBoxName := anObject
 ]
 
-{ #category : #indexing }
+{ #category : 'indexing' }
 MDMailArchive >> indexConversations [ 
 
 	"This has to be done after loading all mails as we have to know about all emails
@@ -335,7 +336,7 @@ MDMailArchive >> indexConversations [
 	self mailIdIndex values do: [:m | self indexIntoConversationIndex: m]
 ]
 
-{ #category : #indexing }
+{ #category : 'indexing' }
 MDMailArchive >> indexEntry: anEntry [
 
 	self protectIndexAccessDuring: [
@@ -343,7 +344,7 @@ MDMailArchive >> indexEntry: anEntry [
 		self indexIntoConversationIndex: anEntry]
 ]
 
-{ #category : #indexing }
+{ #category : 'indexing' }
 MDMailArchive >> indexIntoConversationIndex: anEntry [
 
 	| conversation startMailId |
@@ -362,17 +363,17 @@ MDMailArchive >> indexIntoConversationIndex: anEntry [
 	self conversationIndex at: anEntry messageId put: conversation.
 ]
 
-{ #category : #indexing }
+{ #category : 'indexing' }
 MDMailArchive >> indexIntoMessageIdIndex: anEntry [
 
 	| oldEntry |
 
 	oldEntry := self mailIdIndex at: anEntry messageId ifAbsentPut: [ anEntry ].
 	oldEntry == anEntry ifFalse: [ 
-		self halt. ]
+		self notYetTested. ]
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 MDMailArchive >> initialize [
 
 	self 
@@ -383,7 +384,7 @@ MDMailArchive >> initialize [
 	indexSemaphore := Mutex new.
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 MDMailArchive >> initializeBoxes [
 
 	| rootBoxNames |
@@ -393,7 +394,7 @@ MDMailArchive >> initializeBoxes [
 	
 ]
 
-{ #category : #synchronization }
+{ #category : 'synchronization' }
 MDMailArchive >> interactiveSynchronize [
 
 	<rackOperationLabel: 'synchronize' inContextMenus: true>
@@ -401,31 +402,31 @@ MDMailArchive >> interactiveSynchronize [
 	[self synchronize] forkAt: Processor userBackgroundPriority 
 ]
 
-{ #category : #indexing }
+{ #category : 'indexing' }
 MDMailArchive >> mailIdIndex [
 
 	^ mailIdIndex
 ]
 
-{ #category : #indexing }
+{ #category : 'indexing' }
 MDMailArchive >> mailIdIndex: anObject [
 
 	mailIdIndex := anObject
 ]
 
-{ #category : #ui }
+{ #category : 'ui' }
 MDMailArchive >> mailListIcon [
 
 	^ nil
 ]
 
-{ #category : #indexing }
+{ #category : 'indexing' }
 MDMailArchive >> messageEntryForId: id ifAbsent: absentLogic [
 
 	^ self protectIndexAccessDuring: [self mailIdIndex at: id ifAbsent: absentLogic]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MDMailArchive >> migrateBoxPaths [
 	
 	self allBoxes do: [:b | 
@@ -433,13 +434,13 @@ MDMailArchive >> migrateBoxPaths [
 			b fileDirectory: self fileDirectory / b fullBoxName]]
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMailArchive >> openRackStandardMorph [
 
 	^ MDBoxBrowser openOnArchive: self
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MDMailArchive >> printOn: aStream [
 
 	aStream 
@@ -447,19 +448,19 @@ MDMailArchive >> printOn: aStream [
 		nextPutAll: (self archiveName ifNil: ['Unknown'])
 ]
 
-{ #category : #indexing }
+{ #category : 'indexing' }
 MDMailArchive >> protectIndexAccessDuring: aBlock [
 
 	^ indexSemaphore critical: aBlock
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MDMailArchive >> readBoxNames [
 
 	 ^ self fileDirectory directoryNames
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 MDMailArchive >> readRootBoxNames [
 	"Determine the mail box names.  Mail boxes are directories that have the cur, new and tmp subdirectories"
 	| boxNames |
@@ -476,7 +477,7 @@ MDMailArchive >> readRootBoxNames [
 	
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMailArchive >> saveToFile [
 
 	| file backup stream |
@@ -494,39 +495,39 @@ MDMailArchive >> saveToFile [
 
 ]
 
-{ #category : #searching }
+{ #category : 'searching' }
 MDMailArchive >> search: expressionString [
 	"Search the receives messages and answer a collection of message matching the supplied expression"
 
 	^MDSearchParser search: expressionString inArchive: self.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> sentBox [
 	
 	^ self boxNamed: self sentBoxName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> sentBoxName [
 
 	^ sentBoxName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> sentBoxName: aString [
 
 	sentBoxName := aString
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMailArchive >> stonOn: stonWriter [
 
 	stonWriter writeObject: self streamShortList: [ :array |
 		array add: self asStonDictionary ]
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 MDMailArchive >> stonPostReferenceResolution [ 
 
 	| convIndex |
@@ -540,7 +541,7 @@ MDMailArchive >> stonPostReferenceResolution [
 
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 MDMailArchive >> storeMail: aMailMessage in: aMailBox [
 
 	| newMail |
@@ -551,13 +552,13 @@ MDMailArchive >> storeMail: aMailMessage in: aMailBox [
 	^ newMail
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 MDMailArchive >> storeSentMail: aMailMessage [
 
 	^ self sentBox storeMail: aMailMessage
 ]
 
-{ #category : #synchronization }
+{ #category : 'synchronization' }
 MDMailArchive >> synchronize [
 
 	self
@@ -567,7 +568,7 @@ MDMailArchive >> synchronize [
 	self conversationIndex ifEmpty: [self indexConversations].
 ]
 
-{ #category : #synchronization }
+{ #category : 'synchronization' }
 MDMailArchive >> synchronizeBoxes [
 
 	| newBoxNames actualBoxNames ownBoxNames |
@@ -583,7 +584,7 @@ MDMailArchive >> synchronizeBoxes [
 	self changed.
 ]
 
-{ #category : #synchronization }
+{ #category : 'synchronization' }
 MDMailArchive >> synchronizeMessageEntries [
 
 	self boxes values do: [:b | b synchronizeMessageEntries].
@@ -591,25 +592,25 @@ MDMailArchive >> synchronizeMessageEntries [
 	self changed.
 ]
 
-{ #category : #boxes }
+{ #category : 'boxes' }
 MDMailArchive >> trashBox [
 
 	^ self boxNamed: self trashBoxName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> trashBoxName [
 
 	^ trashBoxName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailArchive >> trashBoxName: anObject [
 
 	trashBoxName := anObject
 ]
 
-{ #category : #indexing }
+{ #category : 'indexing' }
 MDMailArchive >> updateIndex [
 
 	| removedMails |
@@ -624,13 +625,13 @@ MDMailArchive >> updateIndex [
 		self mailIdIndex removeKey: m messageId]]
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMailArchive >> worldIconMorph [
 
 	^ ((RIcons icons8Letterbox64pxIcon) scaledToSize: 35@35) asMorph
 ]
 
-{ #category : #Rack }
+{ #category : 'Rack' }
 MDMailArchive >> worldIconText [
 
 	^ self archiveName , '(' , (self allMails count: [:m | m isUnread]) asString , ')'

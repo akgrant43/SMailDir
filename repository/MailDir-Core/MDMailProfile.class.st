@@ -1,6 +1,6 @@
 Class {
-	#name : #MDMailProfile,
-	#superclass : #Object,
+	#name : 'MDMailProfile',
+	#superclass : 'Object',
 	#instVars : [
 		'smtpServer',
 		'smtpServerPort',
@@ -13,16 +13,17 @@ Class {
 	#classVars : [
 		'Profiles'
 	],
-	#category : 'MailDir-Core'
+	#category : 'MailDir-Core',
+	#package : 'MailDir-Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailProfile class >> Profiles [
 
 	^ Profiles ifNil: [Profiles := Set new]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MDMailProfile class >> create [
 
 	| newProfile |
@@ -35,48 +36,48 @@ MDMailProfile class >> create [
 	
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MDMailProfile class >> forMessage: aMailMessage [ 
 	self shouldBeImplemented
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MDMailProfile class >> new [
 
 	self error: 'You can only create persistent instances of this'
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 MDMailProfile class >> removeFromSystem: aProfile [
 
 	Profiles remove: aProfile
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailProfile >> archive [
 
 	^ archive
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailProfile >> archive: anObject [
 
 	archive := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailProfile >> hostName [
 
 	^ ((self smtpServer findTokens: '.') last: 2) joinSeparatedBy: '.'
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 MDMailProfile >> initialize [
 
 	self archive: MDMailArchive new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailProfile >> newMessageId [
 
 	| id |
@@ -84,93 +85,93 @@ MDMailProfile >> newMessageId [
 	^ id , $@ , self hostName
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MDMailProfile >> printOn: aStream [
 
 	aStream nextPutAll: self profileName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailProfile >> profileName [
 
 	^ profileName ifNil: ['']
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailProfile >> profileName: anObject [
 
 	profileName := anObject
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 MDMailProfile >> replyTo: aMessage [
 
 	MDMailComposition sendMessage: (MailMessage replyFor: aMessage)
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailProfile >> smtpPassword [
 
 	^ smtpPassword
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailProfile >> smtpPassword: anObject [
 
 	smtpPassword := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailProfile >> smtpServer [
 
 	^ smtpServer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailProfile >> smtpServer: anObject [
 
 	smtpServer := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailProfile >> smtpServerPort [
 
 	^ smtpServerPort
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailProfile >> smtpServerPort: anObject [
 
 	smtpServerPort := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailProfile >> smtpUsername [
 
 	^ smtpUsername
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailProfile >> smtpUsername: anObject [
 
 	smtpUsername := anObject
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 MDMailProfile >> storeSentMessage: aMessage [
 
 	self archive storeSentMail: aMessage
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailProfile >> userEmailAddress [
 
 	^ userEmailAddress
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MDMailProfile >> userEmailAddress: anObject [
 
 	userEmailAddress := anObject
